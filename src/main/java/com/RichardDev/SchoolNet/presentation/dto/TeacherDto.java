@@ -1,11 +1,10 @@
 package com.RichardDev.SchoolNet.presentation.dto;
 
-import com.RichardDev.SchoolNet.constant.Grade;
+import com.RichardDev.SchoolNet.constant.Subject;
 import lombok.Data;
 
 @Data
-public class StudentDto {
-
+public class TeacherDto {
     private String name;
     private String lastName;
     private String username;
@@ -13,5 +12,5 @@ public class StudentDto {
     private String email;
     private String phone;
     private String address;
-    private Grade grade;
+    private Subject areaOfExpertise;
 }
