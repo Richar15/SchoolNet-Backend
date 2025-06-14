@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Alejandro",
+    "lastName": "Martínez",
+    "username": "alejandro.martinez",
+    "password": "Student2024!",
+    "email": "alejandro.martinez@estudiantes.edu",
+    "phone": "3601234567",
+    "address": "Calle 10 #15-20",
+    "grade": "SEXTO"
+  },
+  {
+    "name": "Camila",
+    "lastName": "Rodríguez",
+    "username": "camila.rodriguez",
+    "password": "Camila123456",
+    "email": "camila.rodriguez@estudiantes.edu",
+    "phone": "3612345678",
+    "address": "Carrera 5 #25-30",
+    "grade": "SEPTIMO"
+  },
+  {
+    "name": "Santiago",
+    "lastName": "González",
+    "username": "santiago.gonzalez",
+    "password": "Santiago2024",
+    "email": "santiago.gonzalez@estudiantes.edu",
+    "phone": "3623456789",
+    "address": "Avenida 8 #35-40",
+    "grade": "OCTAVO"
+  },
+  {
+    "name": "Valentina",
+    "lastName": "López",
+    "username": "valentina.lopez",
+    "password": "Valentina123",
+    "email": "valentina.lopez@estudiantes.edu",
+    "phone": "3634567890",
+    "address": "Calle 12 #45-50",
+    "grade": "NOVENO"
+  },
+  {
+    "name": "Mateo",
+    "lastName": "Hernández",
+    "username": "mateo.hernandez",
+    "password": "Mateo2024!",
+    "email": "mateo.hernandez@estudiantes.edu",
+    "phone": "3645678901",
+    "address": "Carrera 18 #55-60",
+    "grade": "DECIMO"
+  },
+  {
+    "name": "Isabella",
+    "lastName": "García",
+    "username": "isabella.garcia",
+    "password": "Isabella123",
+    "email": "isabella.garcia@estudiantes.edu",
+    "phone": "3656789012",
+    "address": "Avenida 22 #65-70",
+    "grade": "UNDECIMO"
+  }
+]
