@@ -10,6 +10,7 @@ import com.RichardDev.SchoolNet.service.interfaces.TeacherService;
 import com.RichardDev.SchoolNet.util.mapper.TeacherMapper;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,25 +23,34 @@ public class TeacherServiceImpl implements TeacherService {
 
     private final TeacherRepository teacherRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public TeacherDto create(TeacherDto dto) {
         try {
             TeacherEntity entity = TeacherMapper.toEntity(dto);
+            // Encriptar la contraseña antes de guardar
+            entity.setPassword(passwordEncoder.encode(entity.getPassword()));
             return TeacherMapper.toDto(teacherRepository.save(entity));
         } catch (org.springframework.dao.DataIntegrityViolationException e) {
             throw new UniqueFieldException("Ya existe un profesor con el mismo nombre, username, email, teléfono o apellido.");
         }
     }
-    @Override
-    public TeacherDto update(Long id, TeacherDto dto) {
-        TeacherEntity entity = teacherRepository.findById(id).orElse(null);
-        if (entity == null) {
-            throw new UserNotFoundException("Profesor no encontrado con id: " + id);
-        }
-        TeacherMapper.updateEntityFromDto(dto, entity);
-        return TeacherMapper.toDto(teacherRepository.save(entity));
-    }
+   @Override
+   public TeacherDto update(Long id, TeacherDto dto) {
+       TeacherEntity entity = teacherRepository.findById(id).orElse(null);
+       if (entity == null) {
+           throw new UserNotFoundException("Profesor no encontrado con id: " + id);
+       }
 
+       // Verificar si hay una nueva contraseña para encriptar
+       if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
+           dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+       }
+
+       TeacherMapper.updateEntityFromDto(dto, entity);
+       return TeacherMapper.toDto(teacherRepository.save(entity));
+   }
     @Override
     public List<TeacherDto> getAll() {
         List<TeacherEntity> teachers = teacherRepository.findAll();

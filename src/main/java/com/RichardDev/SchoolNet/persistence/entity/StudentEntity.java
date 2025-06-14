@@ -2,12 +2,15 @@ package com.RichardDev.SchoolNet.persistence.entity;
 
 import com.RichardDev.SchoolNet.constant.Grade;
 import com.RichardDev.SchoolNet.constant.Rol;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -24,6 +27,7 @@ public class StudentEntity extends UserEntity {
     @NotNull(message = "El campo 'grade' no puede ser nulo")
     @Enumerated(EnumType.STRING)
     private Grade grade;
+
 
     public StudentEntity() {
         super.setRol(Rol.STUDENT);

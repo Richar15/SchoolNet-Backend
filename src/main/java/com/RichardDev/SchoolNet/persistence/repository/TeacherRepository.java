@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface TeacherRepository extends JpaRepository<TeacherEntity, Long> {
@@ -17,5 +18,9 @@ public interface TeacherRepository extends JpaRepository<TeacherEntity, Long> {
     List<TeacherEntity> searchByKeyword(String keyword);
 
     List<TeacherEntity> findByAreaOfExpertise(Subject areaOfExpertise);
+
+    Optional<TeacherEntity> findByUsername(String username);
+
+
 
 }

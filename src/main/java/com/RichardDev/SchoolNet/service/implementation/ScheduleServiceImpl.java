@@ -15,75 +15,49 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 @Slf4j
 public class ScheduleServiceImpl {
 
+    // Modificado para incluir todas las materias en todos los grados
     private static final Map<Grade, List<Subject>> GRADE_SUBJECTS = Map.ofEntries(
-        Map.entry(Grade.SEXTO, Arrays.asList(
-                Subject.MATEMATICAS, Subject.ESPANOL, Subject.CIENCIAS, Subject.ARTES,
-                Subject.EDUCACION_FISICA, Subject.MUSICA
-        )),
-        Map.entry(Grade.SEPTIMO, Arrays.asList(
-                Subject.MATEMATICAS, Subject.ESPANOL, Subject.CIENCIAS, Subject.HISTORIA,
-                Subject.ARTES, Subject.EDUCACION_FISICA
-        )),
-        Map.entry(Grade.OCTAVO, Arrays.asList(
-                Subject.MATEMATICAS, Subject.ESPANOL, Subject.CIENCIAS, Subject.HISTORIA,
-                Subject.GEOGRAFIA, Subject.INGLES
-        )),
-        Map.entry(Grade.NOVENO, Arrays.asList(
-                Subject.MATEMATICAS, Subject.ESPANOL, Subject.CIENCIAS, Subject.HISTORIA,
-                Subject.GEOGRAFIA, Subject.INGLES, Subject.ARTES, Subject.EDUCACION_FISICA
-        )),
-        Map.entry(Grade.DECIMO, Arrays.asList(
-                Subject.MATEMATICAS, Subject.ESPANOL, Subject.CIENCIAS, Subject.HISTORIA,
-                Subject.GEOGRAFIA, Subject.INGLES, Subject.FISICA, Subject.QUIMICA
-        )),
-        Map.entry(Grade.UNDECIMO, Arrays.asList(
-                Subject.MATEMATICAS, Subject.ESPANOL, Subject.CIENCIAS, Subject.HISTORIA,
-                Subject.GEOGRAFIA, Subject.INGLES, Subject.FISICA, Subject.QUIMICA
-        ))
+            Map.entry(Grade.SEXTO, Arrays.asList(Subject.values())),
+            Map.entry(Grade.SEPTIMO, Arrays.asList(Subject.values())),
+            Map.entry(Grade.OCTAVO, Arrays.asList(Subject.values())),
+            Map.entry(Grade.NOVENO, Arrays.asList(Subject.values())),
+            Map.entry(Grade.DECIMO, Arrays.asList(Subject.values())),
+            Map.entry(Grade.UNDECIMO, Arrays.asList(Subject.values()))
     );
 
-    // Definir salones fijos por grado
     private static final Map<Grade, String> GRADE_CLASSROOMS = Map.ofEntries(
-        Map.entry(Grade.SEXTO, "Aula 101"),
-        Map.entry(Grade.SEPTIMO, "Aula 201"),
-        Map.entry(Grade.OCTAVO, "Aula 301"),
-        Map.entry(Grade.NOVENO, "Aula 401"),
-        Map.entry(Grade.DECIMO, "Aula 501"),
-        Map.entry(Grade.UNDECIMO, "Aula 601")
+            Map.entry(Grade.SEXTO, "Aula 101"),
+            Map.entry(Grade.SEPTIMO, "Aula 201"),
+            Map.entry(Grade.OCTAVO, "Aula 301"),
+            Map.entry(Grade.NOVENO, "Aula 401"),
+            Map.entry(Grade.DECIMO, "Aula 501"),
+            Map.entry(Grade.UNDECIMO, "Aula 601")
     );
 
-    // Aulas especiales para materias específicas
     private static final Map<Subject, String> SPECIAL_CLASSROOMS = Map.ofEntries(
-        Map.entry(Subject.EDUCACION_FISICA, "Gimnasio"),
-        Map.entry(Subject.ARTES, "Salón de Arte"),
-        Map.entry(Subject.MUSICA, "Aula de Música"),
-        Map.entry(Subject.INFORMATICA, "Laboratorio de Computación"),
-        Map.entry(Subject.FISICA, "Laboratorio de Física"),
-        Map.entry(Subject.QUIMICA, "Laboratorio de Química"),
-        Map.entry(Subject.BIOLOGIA, "Laboratorio de Biología")
-    );
-
-    private final List<Subject> defaultSubjects = Arrays.asList(
-            Subject.MATEMATICAS, Subject.CIENCIAS, Subject.HISTORIA, Subject.GEOGRAFIA,
-            Subject.INGLES, Subject.FISICA, Subject.QUIMICA, Subject.BIOLOGIA,
-            Subject.ARTES, Subject.MUSICA, Subject.INFORMATICA, Subject.FILOSOFIA,
-            Subject.ECONOMIA, Subject.SOCIOLOGIA, Subject.EDUCACION_FISICA,
-            Subject.LITERATURA, Subject.ESPANOL, Subject.FRANCES, Subject.SALUD,
-            Subject.TECNOLOGIA
+            Map.entry(Subject.EDUCACION_FISICA, "Gimnasio"),
+            Map.entry(Subject.ARTES, "Salón de Arte"),
+            Map.entry(Subject.INFORMATICA, "Laboratorio de Computación"),
+            Map.entry(Subject.FISICA, "Laboratorio de Física"),
+            Map.entry(Subject.QUIMICA, "Laboratorio de Química"),
+            Map.entry(Subject.BIOLOGIA, "Laboratorio de Biología")
     );
 
     private static final int MAX_HOURS_PER_TEACHER_PER_DAY = 6;
     private static final int MAX_TOTAL_HOURS_PER_TEACHER = 25;
     private static final String START_TIME = "08:00";
     private static final int SESSIONS_PER_DAY = 6;
-    private static final int RECREO_AFTER_SESSION = 3; // Recreo después de la 3ra hora
-    private static final int RECREO_DURATION_MINUTES = 30; // Duración del recreo en minutos
+    private static final int RECREO_AFTER_SESSION = 3;
+    private static final int RECREO_DURATION_MINUTES = 30;
+    private static final int MIN_DAYS_PER_SUBJECT = 2;
+    private static final int MAX_HOURS_PER_SUBJECT_PER_DAY = 2;
 
     private final List<String> weekDays = Arrays.asList("Lunes", "Martes", "Miércoles", "Jueves", "Viernes");
 
@@ -131,25 +105,22 @@ public class ScheduleServiceImpl {
         }
     }
 
-    // Método para calcular la hora de inicio y fin de una sesión considerando el recreo
     private Map<String, String> calculateSessionTime(int sessionIndex, int startHour) {
-        int adjustedSessionIndex = sessionIndex;
-        int timeAdjustment = 0;
-
-        // Si estamos después del recreo, ajustamos el índice y añadimos el tiempo del recreo
         if (sessionIndex >= RECREO_AFTER_SESSION) {
-            timeAdjustment = RECREO_DURATION_MINUTES / 60; // Ajuste en horas
-            int minutesAdjustment = RECREO_DURATION_MINUTES % 60; // Ajuste en minutos
+            int minutesAdjustment = RECREO_DURATION_MINUTES;
+            int hoursAdjustment = minutesAdjustment / 60;
+            int remainingMinutes = minutesAdjustment % 60;
 
-            int startHourValue = startHour + sessionIndex + timeAdjustment;
-            int endHourValue = startHour + sessionIndex + timeAdjustment + 1;
+            int startHourValue = startHour + sessionIndex + hoursAdjustment;
+            int startMinuteValue = remainingMinutes;
+            int endHourValue = startHourValue + 1;
+            int endMinuteValue = remainingMinutes;
 
-            String startTime = String.format("%02d:%02d", startHourValue, minutesAdjustment);
-            String endTime = String.format("%02d:%02d", endHourValue, minutesAdjustment);
+            String startTime = String.format("%02d:%02d", startHourValue, startMinuteValue);
+            String endTime = String.format("%02d:%02d", endHourValue, endMinuteValue);
 
             return Map.of("startTime", startTime, "endTime", endTime);
         } else {
-            // Para sesiones antes del recreo, el cálculo es normal
             String startTime = String.format("%02d:00", startHour + sessionIndex);
             String endTime = String.format("%02d:00", startHour + sessionIndex + 1);
 
@@ -157,21 +128,16 @@ public class ScheduleServiceImpl {
         }
     }
 
-    // Método para obtener el salón para un grado y materia
     private String getClassroomForGradeAndSubject(Grade grade, Subject subject) {
-        // Si la materia requiere un aula especializada, usamos esa
         if (SPECIAL_CLASSROOMS.containsKey(subject)) {
             return SPECIAL_CLASSROOMS.get(subject);
         }
-
-        // De lo contrario, usamos el aula regular del grado
         return GRADE_CLASSROOMS.getOrDefault(grade, "Aula sin asignar");
     }
 
     private String assignTeacher(String day, String startTime, Subject subject,
-                                 TeacherAvailabilityTracker tracker) {
+                               TeacherAvailabilityTracker tracker) {
         String timeSlot = day + "_" + startTime;
-
         List<TeacherEntity> teachers = teacherRepository.findByAreaOfExpertise(subject);
 
         if (teachers.isEmpty()) {
@@ -181,14 +147,9 @@ public class ScheduleServiceImpl {
         }
 
         for (TeacherEntity teacher : teachers) {
-            if (teacher.getAreaOfExpertise() != null &&
-                    teacher.getAreaOfExpertise().equals(subject)) {
-
-                if (tracker.assignTimeSlot(teacher.getName(), timeSlot)) {
-                    log.debug("Profesor {} asignado para {} en {}",
-                            teacher.getName(), subject, timeSlot);
-                    return teacher.getName();
-                }
+            if (tracker.assignTimeSlot(teacher.getName(), timeSlot)) {
+                log.debug("Profesor {} asignado para {} en {}", teacher.getName(), subject, timeSlot);
+                return teacher.getName();
             }
         }
 
@@ -198,43 +159,213 @@ public class ScheduleServiceImpl {
     }
 
     private List<Subject> getSubjectsForGrade(Grade grade) {
-        return GRADE_SUBJECTS.getOrDefault(grade, defaultSubjects);
+        return GRADE_SUBJECTS.getOrDefault(grade, Arrays.asList(Subject.values()));
     }
 
-    private List<Subject> distributeSubjects(Grade grade) {
-        List<Subject> gradeSubjects = getSubjectsForGrade(grade);
-        List<Subject> distributedSubjects = new ArrayList<>();
+    /**
+     * Genera un plan semanal completo asegurando que todas las materias se ven
+     * en al menos dos días diferentes y máximo 2 horas por día.
+     */
+    private Map<String, List<Subject>> generateBalancedWeeklyPlan(Grade grade) {
+        List<Subject> gradeSubjects = new ArrayList<>(getSubjectsForGrade(grade));
+        Map<String, List<Subject>> weeklyPlan = new HashMap<>();
 
-        int totalSessions = weekDays.size() * SESSIONS_PER_DAY;
-
-        Map<Subject, Integer> subjectFrequency = new HashMap<>();
-        int sessionsPerSubject = totalSessions / gradeSubjects.size();
-        int remainingSessions = totalSessions % gradeSubjects.size();
-
-        for (Subject subject : gradeSubjects) {
-            subjectFrequency.put(subject, sessionsPerSubject);
+        // Inicializar días vacíos
+        for (String day : weekDays) {
+            weeklyPlan.put(day, new ArrayList<>());
         }
 
+        // Estructuras para seguimiento de distribución
+        Map<Subject, Set<String>> subjectDaysMap = new HashMap<>();
+        Map<String, Map<Subject, Integer>> subjectCountPerDay = new HashMap<>();
+
+        // Inicializar estructuras de seguimiento
+        for (Subject subject : gradeSubjects) {
+            subjectDaysMap.put(subject, new HashSet<>());
+        }
+
+        for (String day : weekDays) {
+            subjectCountPerDay.put(day, new HashMap<>());
+            for (Subject subject : gradeSubjects) {
+                subjectCountPerDay.get(day).put(subject, 0);
+            }
+        }
+
+        // Priorizar materias clave para distribución inicial
         List<Subject> prioritySubjects = Arrays.asList(
-                Subject.MATEMATICAS, Subject.ESPANOL, Subject.CIENCIAS
+                Subject.MATEMATICAS, Subject.ESPANOL, Subject.HISTORIA,
+                Subject.GEOGRAFIA, Subject.INGLES, Subject.FISICA,
+                Subject.QUIMICA, Subject.BIOLOGIA, Subject.FILOSOFIA,
+                Subject.ECONOMIA, Subject.LITERATURA
         );
 
+        List<Subject> prioritizedSubjects = new ArrayList<>();
         for (Subject subject : prioritySubjects) {
-            if (remainingSessions > 0 && subjectFrequency.containsKey(subject)) {
-                subjectFrequency.put(subject, subjectFrequency.get(subject) + 1);
-                remainingSessions--;
+            if (gradeSubjects.contains(subject)) {
+                prioritizedSubjects.add(subject);
             }
         }
 
-        List<Subject> shuffledSubjects = new ArrayList<>();
-        for (Map.Entry<Subject, Integer> entry : subjectFrequency.entrySet()) {
-            for (int i = 0; i < entry.getValue(); i++) {
-                shuffledSubjects.add(entry.getKey());
+        // Agregar el resto de materias que no están en la lista de prioridades
+        for (Subject subject : gradeSubjects) {
+            if (!prioritizedSubjects.contains(subject)) {
+                prioritizedSubjects.add(subject);
             }
         }
 
-        Collections.shuffle(shuffledSubjects);
-        return shuffledSubjects;
+        // PASO 1: Distribuir cada materia en al menos 2 días diferentes
+        for (Subject subject : prioritizedSubjects) {
+            // Elegir al menos MIN_DAYS_PER_SUBJECT días diferentes para cada materia
+            List<String> availableDays = new ArrayList<>(weekDays);
+            Collections.shuffle(availableDays);
+
+            int daysAssigned = 0;
+            for (String day : availableDays) {
+                if (daysAssigned >= MIN_DAYS_PER_SUBJECT) break;
+
+                List<Subject> dayPlan = weeklyPlan.get(day);
+                Map<Subject, Integer> daySubjectCount = subjectCountPerDay.get(day);
+
+                // Solo asignar si hay espacio y no excede el límite diario
+                if (dayPlan.size() < SESSIONS_PER_DAY &&
+                    daySubjectCount.get(subject) < MAX_HOURS_PER_SUBJECT_PER_DAY) {
+
+                    dayPlan.add(subject);
+                    subjectDaysMap.get(subject).add(day);
+                    daySubjectCount.put(subject, daySubjectCount.get(subject) + 1);
+                    daysAssigned++;
+                }
+            }
+        }
+
+        // PASO 2: Formar bloques de 2 horas para materias principales cuando sea posible
+        for (String day : weekDays) {
+            List<Subject> dayPlan = weeklyPlan.get(day);
+            Map<Subject, Integer> daySubjectCount = subjectCountPerDay.get(day);
+
+            for (int i = 0; i < dayPlan.size(); i++) {
+                Subject subject = dayPlan.get(i);
+
+                // Si ya hay una aparición y podemos añadir otra (para formar un bloque de 2)
+                if (daySubjectCount.get(subject) == 1 && dayPlan.size() < SESSIONS_PER_DAY) {
+                    dayPlan.add(subject);
+                    daySubjectCount.put(subject, daySubjectCount.get(subject) + 1);
+                }
+            }
+        }
+
+        // PASO 3: Completar el horario con las materias menos utilizadas
+        boolean changes;
+        do {
+            changes = false;
+
+            for (String day : weekDays) {
+                List<Subject> dayPlan = weeklyPlan.get(day);
+                Map<Subject, Integer> daySubjectCount = subjectCountPerDay.get(day);
+
+                while (dayPlan.size() < SESSIONS_PER_DAY) {
+                    // Encontrar la materia que puede añadirse a este día
+                    Subject bestSubject = findBestSubjectForDay(
+                            weeklyPlan, day, subjectDaysMap, subjectCountPerDay, prioritizedSubjects);
+
+                    if (bestSubject != null) {
+                        dayPlan.add(bestSubject);
+                        daySubjectCount.put(bestSubject, daySubjectCount.get(bestSubject) + 1);
+                        subjectDaysMap.get(bestSubject).add(day);
+                        changes = true;
+                    } else {
+                        // Si no encontramos ninguna materia adecuada, usar la primera disponible
+                        for (Subject subject : prioritizedSubjects) {
+                            if (daySubjectCount.get(subject) < MAX_HOURS_PER_SUBJECT_PER_DAY) {
+                                dayPlan.add(subject);
+                                daySubjectCount.put(subject, daySubjectCount.get(subject) + 1);
+                                subjectDaysMap.get(subject).add(day);
+                                changes = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    // Si no pudimos añadir ninguna materia, salir del bucle
+                    if (!changes) break;
+                }
+            }
+        } while (changes && hasIncompleteDay(weeklyPlan));
+
+        // Validación final
+        validateFinalSchedule(weeklyPlan, subjectDaysMap, subjectCountPerDay, prioritizedSubjects);
+
+        return weeklyPlan;
+    }
+
+    private void validateFinalSchedule(
+            Map<String, List<Subject>> weeklyPlan,
+            Map<Subject, Set<String>> subjectDaysMap,
+            Map<String, Map<Subject, Integer>> subjectCountPerDay,
+            List<Subject> allSubjects) {
+
+        StringBuilder warnings = new StringBuilder();
+
+        // Verificar que cada materia aparezca en el horario
+        for (Subject subject : allSubjects) {
+            int totalHours = 0;
+            for (String day : weekDays) {
+                totalHours += subjectCountPerDay.get(day).getOrDefault(subject, 0);
+            }
+
+            if (totalHours == 0) {
+                warnings.append("ALERTA: La materia ").append(subject)
+                       .append(" no aparece en el horario\n");
+            } else if (subjectDaysMap.get(subject).size() < MIN_DAYS_PER_SUBJECT) {
+                warnings.append("Advertencia: ").append(subject)
+                       .append(" solo se ve en ").append(subjectDaysMap.get(subject).size())
+                       .append(" días diferentes (mínimo recomendado: ").append(MIN_DAYS_PER_SUBJECT).append(")\n");
+            }
+        }
+
+        if (warnings.length() > 0) {
+            log.warn(warnings.toString());
+        }
+    }
+
+    private boolean hasIncompleteDay(Map<String, List<Subject>> weeklyPlan) {
+        return weeklyPlan.values().stream().anyMatch(day -> day.size() < SESSIONS_PER_DAY);
+    }
+
+    private Subject findBestSubjectForDay(
+            Map<String, List<Subject>> weeklyPlan,
+            String day,
+            Map<Subject, Set<String>> subjectDaysMap,
+            Map<String, Map<Subject, Integer>> subjectCountPerDay,
+            List<Subject> allSubjects) {
+
+        Map<Subject, Integer> daySubjectCount = subjectCountPerDay.get(day);
+
+        return allSubjects.stream()
+            .filter(subject -> daySubjectCount.get(subject) < MAX_HOURS_PER_SUBJECT_PER_DAY)
+            .sorted((s1, s2) -> {
+                // Priorizar materias que no aparecen en el mínimo de días
+                int days1 = subjectDaysMap.get(s1).size();
+                int days2 = subjectDaysMap.get(s2).size();
+
+                if ((days1 < MIN_DAYS_PER_SUBJECT) != (days2 < MIN_DAYS_PER_SUBJECT)) {
+                    return Boolean.compare(days2 < MIN_DAYS_PER_SUBJECT, days1 < MIN_DAYS_PER_SUBJECT);
+                }
+
+                // Priorizar materias con menos horas totales
+                int total1 = getTotalAppearances(s1, subjectCountPerDay);
+                int total2 = getTotalAppearances(s2, subjectCountPerDay);
+
+                return Integer.compare(total1, total2);
+            })
+            .findFirst()
+            .orElse(null);
+    }
+
+    private int getTotalAppearances(Subject subject, Map<String, Map<Subject, Integer>> subjectCountPerDay) {
+        return subjectCountPerDay.values().stream()
+                .mapToInt(dayCount -> dayCount.getOrDefault(subject, 0))
+                .sum();
     }
 
     @Transactional
@@ -244,269 +375,83 @@ public class ScheduleServiceImpl {
         List<SessionEntity> sessionEntities = new ArrayList<>();
         TeacherAvailabilityTracker tracker = new TeacherAvailabilityTracker();
 
-        List<Subject> distributedSubjects = distributeSubjects(grade);
-        int subjectIndex = 0;
-
+        Map<String, List<Subject>> weeklyPlan = generateBalancedWeeklyPlan(grade);
         int startHour = Integer.parseInt(START_TIME.split(":")[0]);
 
         try {
             for (String day : weekDays) {
-                // Crear entrada para el recreo después de la tercera hora
+                // Añadir el recreo
                 if (RECREO_AFTER_SESSION > 0 && RECREO_AFTER_SESSION < SESSIONS_PER_DAY) {
                     String recreoStartTime = String.format("%02d:00", startHour + RECREO_AFTER_SESSION);
                     String recreoEndTime = String.format("%02d:%02d", startHour + RECREO_AFTER_SESSION, RECREO_DURATION_MINUTES);
 
-                    // Añadir una entrada para el recreo (no es una sesión normal)
                     SessionEntity recreoSession = new SessionEntity(
-                            day, recreoStartTime, recreoEndTime, null, "RECREO", "Patio Central");
+                            day, recreoStartTime, recreoEndTime, null, "Patio Central", "RECREO"
+                    );
                     sessionEntities.add(recreoSession);
                 }
+
+                List<Subject> daySubjects = weeklyPlan.get(day);
 
                 for (int sessionIndex = 0; sessionIndex < SESSIONS_PER_DAY; sessionIndex++) {
                     Map<String, String> times = calculateSessionTime(sessionIndex, startHour);
                     String startTime = times.get("startTime");
                     String endTime = times.get("endTime");
 
-                    Subject subject = distributedSubjects.get(subjectIndex % distributedSubjects.size());
+                    Subject subject = daySubjects.get(sessionIndex);
                     String teacherName = assignTeacher(day, startTime, subject, tracker);
                     String classroom = getClassroomForGradeAndSubject(grade, subject);
 
-                    SessionEntity session = new SessionEntity(day, startTime, endTime, subject, teacherName, classroom);
+                    SessionEntity session = new SessionEntity(day, startTime, endTime, subject, classroom, teacherName);
                     sessionEntities.add(session);
-
-                    subjectIndex++;
                 }
             }
 
             ScheduleEntity scheduleEntity = new ScheduleEntity(grade, sessionEntities);
             ScheduleEntity savedSchedule = scheduleRepository.save(scheduleEntity);
 
-            log.info("Horario creado exitosamente para el grado: {}. Sesiones: {}",
-                    grade, sessionEntities.size());
+            log.info("Horario creado para el grado: {}. Sesiones: {}", grade, sessionEntities.size());
             logTeacherWorkload(tracker);
 
             return savedSchedule;
 
-        } catch (TeacherScheduleConflictException e) {
+        } catch (Exception e) {
             log.error("Error al crear horario para grado {}: {}", grade, e.getMessage());
             throw e;
-        } catch (Exception e) {
-            log.error("Error inesperado al crear horario para grado {}", grade, e);
-            throw new RuntimeException("Error interno al generar horario", e);
         }
     }
 
-    @Transactional
-    public ScheduleEntity createDeterministicSchedule(Grade grade) {
-        validateTeacherAvailability();
 
-        List<SessionEntity> sessionEntities = new ArrayList<>();
-        TeacherAvailabilityTracker tracker = new TeacherAvailabilityTracker();
-
-        List<Subject> gradeSubjects = getSubjectsForGrade(grade);
-        int startHour = Integer.parseInt(START_TIME.split(":")[0]);
-
-        try {
-            // Creamos un patrón de distribución de materias fijo para cada día
-            Map<String, List<Subject>> dailySubjects = new HashMap<>();
-
-            // Definimos patrones específicos para cada día
-            dailySubjects.put("Lunes", new ArrayList<>(gradeSubjects));
-            dailySubjects.put("Martes", rotateSubjects(new ArrayList<>(gradeSubjects), 1));
-            dailySubjects.put("Miércoles", rotateSubjects(new ArrayList<>(gradeSubjects), 2));
-            dailySubjects.put("Jueves", rotateSubjects(new ArrayList<>(gradeSubjects), 3));
-            dailySubjects.put("Viernes", rotateSubjects(new ArrayList<>(gradeSubjects), 4));
-
-            // Generamos las sesiones para cada día
-            for (String day : weekDays) {
-                // Crear entrada para el recreo después de la tercera hora
-                if (RECREO_AFTER_SESSION > 0 && RECREO_AFTER_SESSION < SESSIONS_PER_DAY) {
-                    String recreoStartTime = String.format("%02d:00", startHour + RECREO_AFTER_SESSION);
-                    String recreoEndTime = String.format("%02d:%02d", startHour + RECREO_AFTER_SESSION, RECREO_DURATION_MINUTES);
-
-                    // Añadir una entrada para el recreo (no es una sesión normal)
-                    SessionEntity recreoSession = new SessionEntity(
-                            day, recreoStartTime, recreoEndTime, null, "RECREO", "Patio Central");
-                    sessionEntities.add(recreoSession);
-                }
-
-                List<Subject> daySubjects = dailySubjects.get(day);
-
-                for (int sessionIndex = 0; sessionIndex < SESSIONS_PER_DAY; sessionIndex++) {
-                    Map<String, String> times = calculateSessionTime(sessionIndex, startHour);
-                    String startTime = times.get("startTime");
-                    String endTime = times.get("endTime");
-
-                    // Si hay menos materias que sesiones, repetimos las materias
-                    Subject subject = daySubjects.get(sessionIndex % daySubjects.size());
-                    String teacherName = assignTeacher(day, startTime, subject, tracker);
-                    String classroom = getClassroomForGradeAndSubject(grade, subject);
-
-                    SessionEntity session = new SessionEntity(day, startTime, endTime, subject, teacherName, classroom);
-                    sessionEntities.add(session);
-                }
-            }
-
-            ScheduleEntity scheduleEntity = new ScheduleEntity(grade, sessionEntities);
-            ScheduleEntity savedSchedule = scheduleRepository.save(scheduleEntity);
-
-            log.info("Horario determinístico creado para el grado: {}. Sesiones: {}",
-                    grade, sessionEntities.size());
-            logTeacherWorkload(tracker);
-
-            return savedSchedule;
-
-        } catch (Exception e) {
-            log.error("Error al crear horario determinístico para grado {}", grade, e);
-            throw new RuntimeException("Error al generar horario determinístico", e);
-        }
-    }
-
-    // Método auxiliar para rotar las materias
-    private List<Subject> rotateSubjects(List<Subject> subjects, int positions) {
-        if (subjects.isEmpty() || positions <= 0) return subjects;
-
-        for (int i = 0; i < positions; i++) {
-            Subject first = subjects.remove(0);
-            subjects.add(first);
-        }
-
-        return subjects;
-    }
-
-    @Transactional
-    public Map<Grade, ScheduleEntity> createSchedulesForAllGrades() {
-        validateTeacherAvailability();
-
-        Map<Grade, ScheduleEntity> schedules = new HashMap<>();
-        TeacherAvailabilityTracker globalTracker = new TeacherAvailabilityTracker();
-
-        log.info("Iniciando generación de horarios para todos los grados");
-
-        for (Grade grade : Grade.values()) {
-            try {
-                ScheduleEntity schedule = createScheduleWithTracker(grade, globalTracker);
-                schedules.put(grade, schedule);
-                log.info("Horario generado exitosamente para grado: {}", grade);
-            } catch (TeacherScheduleConflictException e) {
-                log.error("No se pudo generar horario para grado {}: {}", grade, e.getMessage());
-                throw new TeacherScheduleConflictException(
-                        String.format("Error al generar horario para %s: %s", grade, e.getMessage()));
-            }
-        }
-
-        log.info("Generación de horarios completada. Grados procesados: {}", schedules.size());
-        logTeacherWorkload(globalTracker);
-
-        return schedules;
-    }
-
-    @Transactional
-    public Map<Grade, ScheduleEntity> createDeterministicSchedulesForAllGrades() {
-        validateTeacherAvailability();
-
-        Map<Grade, ScheduleEntity> schedules = new HashMap<>();
-        TeacherAvailabilityTracker globalTracker = new TeacherAvailabilityTracker();
-
-        log.info("Iniciando generación de horarios determinísticos para todos los grados");
-
-        for (Grade grade : Grade.values()) {
-            try {
-                ScheduleEntity schedule = createDeterministicScheduleWithTracker(grade, globalTracker);
-                schedules.put(grade, schedule);
-                log.info("Horario determinístico generado exitosamente para grado: {}", grade);
-            } catch (TeacherScheduleConflictException e) {
-                log.error("No se pudo generar horario determinístico para grado {}: {}", grade, e.getMessage());
-                throw new TeacherScheduleConflictException(
-                        String.format("Error al generar horario determinístico para %s: %s", grade, e.getMessage()));
-            }
-        }
-
-        log.info("Generación de horarios determinísticos completada. Grados procesados: {}", schedules.size());
-        logTeacherWorkload(globalTracker);
-
-        return schedules;
-    }
 
     private ScheduleEntity createScheduleWithTracker(Grade grade, TeacherAvailabilityTracker tracker) {
         List<SessionEntity> sessionEntities = new ArrayList<>();
-        List<Subject> distributedSubjects = distributeSubjects(grade);
-        int subjectIndex = 0;
+        Map<String, List<Subject>> weeklyPlan = generateBalancedWeeklyPlan(grade);
         int startHour = Integer.parseInt(START_TIME.split(":")[0]);
 
         for (String day : weekDays) {
-            // Crear entrada para el recreo después de la tercera hora
+            // Añadir el recreo
             if (RECREO_AFTER_SESSION > 0 && RECREO_AFTER_SESSION < SESSIONS_PER_DAY) {
                 String recreoStartTime = String.format("%02d:00", startHour + RECREO_AFTER_SESSION);
                 String recreoEndTime = String.format("%02d:%02d", startHour + RECREO_AFTER_SESSION, RECREO_DURATION_MINUTES);
 
-                // Añadir una entrada para el recreo (no es una sesión normal)
                 SessionEntity recreoSession = new SessionEntity(
-                        day, recreoStartTime, recreoEndTime, null, "RECREO", "Patio Central");
+                        day, recreoStartTime, recreoEndTime, null, "Patio Central", "RECREO"
+                );
                 sessionEntities.add(recreoSession);
             }
+
+            List<Subject> daySubjects = weeklyPlan.get(day);
 
             for (int sessionIndex = 0; sessionIndex < SESSIONS_PER_DAY; sessionIndex++) {
                 Map<String, String> times = calculateSessionTime(sessionIndex, startHour);
                 String startTime = times.get("startTime");
                 String endTime = times.get("endTime");
 
-                Subject subject = distributedSubjects.get(subjectIndex % distributedSubjects.size());
+                Subject subject = daySubjects.get(sessionIndex);
                 String teacherName = assignTeacher(day, startTime, subject, tracker);
                 String classroom = getClassroomForGradeAndSubject(grade, subject);
 
-                SessionEntity session = new SessionEntity(day, startTime, endTime, subject, teacherName, classroom);
-                sessionEntities.add(session);
-
-                subjectIndex++;
-            }
-        }
-
-        ScheduleEntity scheduleEntity = new ScheduleEntity(grade, sessionEntities);
-        return scheduleRepository.save(scheduleEntity);
-    }
-
-    private ScheduleEntity createDeterministicScheduleWithTracker(Grade grade, TeacherAvailabilityTracker tracker) {
-        List<SessionEntity> sessionEntities = new ArrayList<>();
-        List<Subject> gradeSubjects = getSubjectsForGrade(grade);
-        int startHour = Integer.parseInt(START_TIME.split(":")[0]);
-
-        // Creamos un patrón de distribución de materias fijo para cada día
-        Map<String, List<Subject>> dailySubjects = new HashMap<>();
-
-        // Definimos patrones específicos para cada día
-        dailySubjects.put("Lunes", new ArrayList<>(gradeSubjects));
-        dailySubjects.put("Martes", rotateSubjects(new ArrayList<>(gradeSubjects), 1));
-        dailySubjects.put("Miércoles", rotateSubjects(new ArrayList<>(gradeSubjects), 2));
-        dailySubjects.put("Jueves", rotateSubjects(new ArrayList<>(gradeSubjects), 3));
-        dailySubjects.put("Viernes", rotateSubjects(new ArrayList<>(gradeSubjects), 4));
-
-        // Generamos las sesiones para cada día
-        for (String day : weekDays) {
-            // Crear entrada para el recreo después de la tercera hora
-            if (RECREO_AFTER_SESSION > 0 && RECREO_AFTER_SESSION < SESSIONS_PER_DAY) {
-                String recreoStartTime = String.format("%02d:00", startHour + RECREO_AFTER_SESSION);
-                String recreoEndTime = String.format("%02d:%02d", startHour + RECREO_AFTER_SESSION, RECREO_DURATION_MINUTES);
-
-                // Añadir una entrada para el recreo (no es una sesión normal)
-                SessionEntity recreoSession = new SessionEntity(
-                        day, recreoStartTime, recreoEndTime, null, "RECREO", "Patio Central");
-                sessionEntities.add(recreoSession);
-            }
-
-            List<Subject> daySubjects = dailySubjects.get(day);
-
-            for (int sessionIndex = 0; sessionIndex < SESSIONS_PER_DAY; sessionIndex++) {
-                Map<String, String> times = calculateSessionTime(sessionIndex, startHour);
-                String startTime = times.get("startTime");
-                String endTime = times.get("endTime");
-
-                // Si hay menos materias que sesiones, repetimos las materias
-                Subject subject = daySubjects.get(sessionIndex % daySubjects.size());
-                String teacherName = assignTeacher(day, startTime, subject, tracker);
-                String classroom = getClassroomForGradeAndSubject(grade, subject);
-
-                SessionEntity session = new SessionEntity(day, startTime, endTime, subject, teacherName, classroom);
+                SessionEntity session = new SessionEntity(day, startTime, endTime, subject, classroom, teacherName);
                 sessionEntities.add(session);
             }
         }
@@ -522,7 +467,7 @@ public class ScheduleServiceImpl {
         }
 
         List<Subject> criticalSubjects = Arrays.asList(
-                Subject.MATEMATICAS, Subject.ESPANOL, Subject.CIENCIAS
+                Subject.MATEMATICAS, Subject.ESPANOL
         );
 
         for (Subject subject : criticalSubjects) {
@@ -552,17 +497,17 @@ public class ScheduleServiceImpl {
         List<SessionEntity> sessions = schedule.getSessions();
 
         Map<Subject, Long> subjectCount = sessions.stream()
-                .filter(s -> s.getSubject() != null) // Excluir recreos
-                .collect(java.util.stream.Collectors.groupingBy(
+                .filter(s -> s.getSubject() != null)
+                .collect(Collectors.groupingBy(
                         SessionEntity::getSubject,
-                        java.util.stream.Collectors.counting()
+                        Collectors.counting()
                 ));
 
         Map<String, Long> teacherCount = sessions.stream()
-                .filter(s -> !s.getTeacher().equals("RECREO")) // Excluir recreos
-                .collect(java.util.stream.Collectors.groupingBy(
+                .filter(s -> !s.getTeacher().equals("RECREO"))
+                .collect(Collectors.groupingBy(
                         SessionEntity::getTeacher,
-                        java.util.stream.Collectors.counting()
+                        Collectors.counting()
                 ));
 
         stats.put("totalSessions", sessions.size());

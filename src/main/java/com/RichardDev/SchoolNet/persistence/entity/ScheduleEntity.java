@@ -24,7 +24,6 @@ public class ScheduleEntity {
     private Grade grade;
 
     @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
-
     private List<SessionEntity> sessions;
 
     public ScheduleEntity(Grade grade, List<SessionEntity> sessions) {

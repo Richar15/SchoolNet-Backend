@@ -37,7 +37,7 @@ public class SessionEntity {
     @JsonIgnore
     private ScheduleEntity schedule;
 
-    public SessionEntity(String day, String start, String end, Subject subject,String classroom, String teacher) {
+    public SessionEntity(String day, String start, String end, Subject subject, String classroom, String teacher) {
         this.day = day;
         this.start = start;
         this.end = end;
