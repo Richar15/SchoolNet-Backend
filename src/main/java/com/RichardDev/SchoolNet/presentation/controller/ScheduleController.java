@@ -17,19 +17,6 @@ public class ScheduleController {
 
     private final ScheduleServiceImpl scheduleService;
 
-    @PostMapping("/deterministic/{grade}")
-    public ResponseEntity<ScheduleEntity> createDeterministicSchedule(@PathVariable Grade grade) {
-        ScheduleEntity schedule = scheduleService.createDeterministicSchedule(grade);
-        return ResponseEntity.ok(schedule);
-    }
-
-    @PostMapping("/deterministic")
-    public ResponseEntity<Map<Grade, ScheduleEntity>> createDeterministicSchedulesForAllGrades() {
-        Map<Grade, ScheduleEntity> schedules = scheduleService.createDeterministicSchedulesForAllGrades();
-        return ResponseEntity.ok(schedules);
-    }
-
-
 
     @PostMapping("/{grade}")
     public ResponseEntity<ScheduleEntity> createSchedule(@PathVariable Grade grade) {
@@ -37,11 +24,6 @@ public class ScheduleController {
         return ResponseEntity.ok(schedule);
     }
 
-    @PostMapping
-    public ResponseEntity<Map<Grade, ScheduleEntity>> createSchedulesForAllGrades() {
-        Map<Grade, ScheduleEntity> schedules = scheduleService.createSchedulesForAllGrades();
-        return ResponseEntity.ok(schedules);
-    }
 
     @GetMapping("/{grade}")
     public ResponseEntity<List<ScheduleEntity>> getSchedulesByGrade(@PathVariable Grade grade) {

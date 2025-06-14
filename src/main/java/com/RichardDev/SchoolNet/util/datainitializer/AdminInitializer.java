@@ -1,4 +1,4 @@
-package com.RichardDev.SchoolNet.util.admin;
+package com.RichardDev.SchoolNet.util.datainitializer;
 
 import com.RichardDev.SchoolNet.constant.Rol;
 import com.RichardDev.SchoolNet.persistence.entity.AdminEntity;

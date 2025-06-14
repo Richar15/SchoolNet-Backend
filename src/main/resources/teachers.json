@@ -10,116 +10,35 @@
     "areaOfExpertise": "MATEMATICAS"
   },
   {
-    "name": "Carlos dev",
-    "lastName": "Vásquez",
-    "username": "cvasquez02",
-    "password": "Algebra123",
-    "email": "carlos.vasquez@escuela.edu",
-    "phone": "3012345678",
-    "address": "Carrera 8 #45-12",
-    "areaOfExpertise": "MATEMATICAS"
-  },
-  {
-    "name": "Ana Sofía",
+    "name": "Carlos Alberto",
     "lastName": "Martínez",
-    "username": "amartinez03",
-    "password": "Geometría2024",
-    "email": "ana.martinez@escuela.edu",
-    "phone": "3023456789",
-    "address": "Avenida 12 #67-89",
+    "username": "cmartinez02",
+    "password": "Math2024Plus",
+    "email": "carlos.martinez@escuela.edu",
+    "phone": "3001234568",
+    "address": "Calle 16 #24-46",
     "areaOfExpertise": "MATEMATICAS"
   },
   {
-    "name": "Luis Fernando",
-    "lastName": "Gómez",
-    "username": "lgomez89",
-    "password": "Algebra2024!",
-    "email": "luis.gomez@escuela.edu",
-    "phone": "3014567890",
-    "address": "Calle 45 #78-12",
-    "areaOfExpertise": "MATEMATICAS"
-  },
-  {
-    "name": "María Camila",
-    "lastName": "Ruiz",
-    "username": "mruiz95",
-    "password": "Calculadora@95",
-    "email": "maria.ruiz@escuela.edu",
-    "phone": "3009876543",
-    "address": "Carrera 9 #34-56",
-    "areaOfExpertise": "MATEMATICAS"
-  },
-  {
-    "name": "Jorge Andrés",
-    "lastName": "Salazar",
-    "username": "jsalazar21",
-    "password": "Matematicas#21",
-    "email": "jorge.salazar@escuela.edu",
-    "phone": "3123456780",
-    "address": "Diagonal 23 #45-67",
-    "areaOfExpertise": "MATEMATICAS"
-  },
-  {
-    "name": "Roberto Miguel",
-    "lastName": "Fernández",
-    "username": "rfernandez04",
-    "password": "Science2024",
-    "email": "roberto.fernandez@escuela.edu",
+    "name": "Esperanza José",
+    "lastName": "López",
+    "username": "elopez04",
+    "password": "Spanish2024!",
+    "email": "esperanza.lopez@escuela.edu",
     "phone": "3034567890",
-    "address": "Calle 20 #34-56",
-    "areaOfExpertise": "CIENCIAS"
+    "address": "Calle 25 #34-56",
+    "areaOfExpertise": "ESPANOL"
   },
   {
-    "name": "Laura Patricia",
-    "lastName": "González",
-    "username": "lgonzalez05",
-    "password": "Biology123",
-    "email": "laura.gonzalez@escuela.edu",
-    "phone": "3045678901",
-    "address": "Carrera 15 #78-90",
-    "areaOfExpertise": "CIENCIAS"
+    "name": "Javier Eduardo",
+    "lastName": "Gómez",
+    "username": "jgomez05",
+    "password": "Spanish2024Plus",
+    "email": "javier.gomez@escuela.edu",
+    "phone": "3034567891",
+    "address": "Calle 26 #35-57",
+    "areaOfExpertise": "ESPANOL"
   },
-  {
-    "name": "Diego Andrés",
-    "lastName": "Jiménez",
-    "username": "djimenez06",
-    "password": "Chemistry24",
-    "email": "diego.jimenez@escuela.edu",
-    "phone": "3056789012",
-    "address": "Calle 30 #12-34",
-    "areaOfExpertise": "CIENCIAS"
-  },
-  {
-    "name": "Laura Isabel",
-    "lastName": "Torres",
-    "username": "ltorres07",
-    "password": "Biologia2024",
-    "email": "laura.torres@escuela.edu",
-    "phone": "3139876543",
-    "address": "Carrera 15 #76-32",
-    "areaOfExpertise": "CIENCIAS"
-  },
-  {
-    "name": "Carlos Andrés",
-    "lastName": "Muñoz",
-    "username": "cmunoz10",
-    "password": "Fisica@2024",
-    "email": "carlos.munoz@escuela.edu",
-    "phone": "3152345678",
-    "address": "Avenida 4 #12-98",
-    "areaOfExpertise": "CIENCIAS"
-  },
-  {
-    "name": "Valentina",
-    "lastName": "Ríos",
-    "username": "vrios12",
-    "password": "Quimica#24",
-    "email": "valentina.rios@escuela.edu",
-    "phone": "3095678901",
-    "address": "Calle 60 #23-45",
-    "areaOfExpertise": "CIENCIAS"
-  },
-
   {
     "name": "Isabella María",
     "lastName": "Herrera",
@@ -131,54 +50,13 @@
     "areaOfExpertise": "HISTORIA"
   },
   {
-    "name": "Sebastián José",
-    "lastName": "Morales",
-    "username": "smorales08",
-    "password": "Ancient123",
-    "email": "sebastian.morales@escuela.edu",
-    "phone": "3078901234",
-    "address": "Carrera 40 #90-12",
-    "areaOfExpertise": "HISTORIA"
-  },
-  {
-    "name": "Valentina Andrea",
-    "lastName": "Castillo",
-    "username": "vcastillo09",
-    "password": "Medieval24",
-    "email": "valentina.castillo@escuela.edu",
-    "phone": "3089012345",
-    "address": "Calle 50 #23-45",
-    "areaOfExpertise": "HISTORIA"
-  },
-
-  {
-    "name": "Santiago David",
-    "lastName": "Castillo",
-    "username": "scastillo09",
-    "password": "Historia@2024",
-    "email": "santiago.castillo@escuela.edu",
-    "phone": "1034567890",
-    "address": "Calle 18 #44-32",
-    "areaOfExpertise": "HISTORIA"
-  },
-  {
-    "name": "Paula Andrea",
-    "lastName": "López",
-    "username": "plopez11",
-    "password": "Colonial2024",
-    "email": "paula.lopez@escuela.edu",
-    "phone": "1098765432",
-    "address": "Carrera 10 #65-21",
-    "areaOfExpertise": "HISTORIA"
-  },
-  {
-    "name": "Daniel Esteban",
-    "lastName": "Moreno",
-    "username": "dmoreno08",
-    "password": "Revolucion#24",
-    "email": "daniel.moreno@escuela.edu",
-    "phone": "2012345678",
-    "address": "Transversal 7 #33-44",
+    "name": "Daniel Felipe",
+    "lastName": "Torres",
+    "username": "dtorres08",
+    "password": "History2024Plus",
+    "email": "daniel.torres@escuela.edu",
+    "phone": "3067890124",
+    "address": "Avenida 26 #57-79",
     "areaOfExpertise": "HISTORIA"
   },
   {
@@ -192,53 +70,13 @@
     "areaOfExpertise": "GEOGRAFIA"
   },
   {
-    "name": "Camila Lucía",
-    "lastName": "Torres",
-    "username": "ctorres11",
-    "password": "WorldMap123",
-    "email": "camila.torres@escuela.edu",
-    "phone": "3101234567",
-    "address": "Carrera 60 #34-56",
-    "areaOfExpertise": "GEOGRAFIA"
-  },
-  {
-    "name": "Mateo Nicolás",
-    "lastName": "Vargas",
-    "username": "mvargas12",
-    "password": "Continents24",
-    "email": "mateo.vargas@escuela.edu",
-    "phone": "3112345678",
-    "address": "Calle 70 #78-90",
-    "areaOfExpertise": "GEOGRAFIA"
-  },
-  {
-    "name": "Alejandra Sofía",
-    "lastName": "Mejía",
-    "username": "amejia14",
-    "password": "Mapas2024",
-    "email": "alejandra.mejia@escuela.edu",
-    "phone": "1019876543",
-    "address": "Calle 30 #45-67",
-    "areaOfExpertise": "GEOGRAFIA"
-  },
-  {
-    "name": "Tomás Gabriel",
-    "lastName": "Córdoba",
-    "username": "tcordova13",
-    "password": "Geografia@24",
-    "email": "tomas.cordoba@escuela.edu",
-    "phone": "2923456789",
-    "address": "Carrera 8 #12-34",
-    "areaOfExpertise": "GEOGRAFIA"
-  },
-  {
-    "name": "Luciana María",
-    "lastName": "Pérez",
-    "username": "lperez16",
-    "password": "Continentes#2024",
-    "email": "luciana.perez@escuela.edu",
-    "phone": "1011234567",
-    "address": "Diagonal 14 #78-90",
+    "name": "Valentina Isabel",
+    "lastName": "Ortega",
+    "username": "vortega11",
+    "password": "Geography24Plus",
+    "email": "valentina.ortega@escuela.edu",
+    "phone": "3090123457",
+    "address": "Avenida 36 #68-90",
     "areaOfExpertise": "GEOGRAFIA"
   },
   {
@@ -252,56 +90,15 @@
     "areaOfExpertise": "INGLES"
   },
   {
-    "name": "Julián Esteban",
-    "lastName": "Rojas",
-    "username": "jrojas14",
-    "password": "Grammar123",
-    "email": "julian.rojas@escuela.edu",
-    "phone": "3134567890",
-    "address": "Carrera 80 #56-78",
+    "name": "Mateo Andrés",
+    "lastName": "Vargas",
+    "username": "mvargas14",
+    "password": "English2024Plus",
+    "email": "mateo.vargas@escuela.edu",
+    "phone": "3123456790",
+    "address": "Avenida 46 #13-35",
     "areaOfExpertise": "INGLES"
   },
-  {
-    "name": "Natalia Isabel",
-    "lastName": "Pérez",
-    "username": "nperez15",
-    "password": "Literatu24",
-    "email": "natalia.perez@escuela.edu",
-    "phone": "3145678901",
-    "address": "Calle 90 #90-12",
-    "areaOfExpertise": "INGLES"
-  },
-  {
-    "name": "Camilo Andrés",
-    "lastName": "Suárez",
-    "username": "csuarez20",
-    "password": "English2024!",
-    "email": "camilo.suarez@escuela.edu",
-    "phone": "1016789013",
-    "address": "Carrera 22 #56-78",
-    "areaOfExpertise": "INGLES"
-  },
-  {
-    "name": "Juliana Fernanda",
-    "lastName": "Morales",
-    "username": "jmorales18",
-    "password": "Grammar@24",
-    "email": "juliana.morales@escuela.edu",
-    "phone": "1027890123",
-    "address": "Calle 55 #10-20",
-    "areaOfExpertise": "INGLES"
-  },
-  {
-    "name": "Esteban José",
-    "lastName": "Rivas",
-    "username": "erivas22",
-    "password": "Ingles#2024",
-    "email": "esteban.rivas@escuela.edu",
-    "phone": "1013456734",
-    "address": "Avenida 10 #23-45",
-    "areaOfExpertise": "INGLES"
-  },
-
   {
     "name": "Gabriel Antonio",
     "lastName": "Sánchez",
@@ -313,54 +110,13 @@
     "areaOfExpertise": "FISICA"
   },
   {
-    "name": "Mariana José",
-    "lastName": "López",
-    "username": "mlopez17",
-    "password": "Quantum123",
-    "email": "mariana.lopez@escuela.edu",
-    "phone": "3167890123",
-    "address": "Carrera 100 #67-89",
-    "areaOfExpertise": "FISICA"
-  },
-  {
-    "name": "Daniel Fernando",
-    "lastName": "García",
-    "username": "dgarcia18",
-    "password": "Newton2024",
-    "email": "daniel.garcia@escuela.edu",
-    "phone": "3178901234",
-    "address": "Calle 110 #34-56",
-    "areaOfExpertise": "FISICA"
-  },
-
-  {
-    "name": "Mariana Alejandra",
-    "lastName": "Delgado",
-    "username": "mdelgado21",
-    "password": "Fuerza#2024",
-    "email": "mariana.delgado@escuela.edu",
-    "phone": "1015678901",
-    "address": "Carrera 50 #78-91",
-    "areaOfExpertise": "FISICA"
-  },
-  {
-    "name": "Luis Eduardo",
-    "lastName": "Ortiz",
-    "username": "lortiz19",
-    "password": "FisicaCuantica24",
-    "email": "luis.ortiz@escuela.edu",
-    "phone": "1021234567",
-    "address": "Calle 40 #22-33",
-    "areaOfExpertise": "FISICA"
-  },
-  {
-    "name": "Gabriela Sofía",
-    "lastName": "Navarro",
-    "username": "gnavarro23",
-    "password": "Energia@2024",
-    "email": "gabriela.navarro@escuela.edu",
-    "phone": "1017890123",
-    "address": "Transversal 3 #11-22",
+    "name": "Laura Camila",
+    "lastName": "Jiménez",
+    "username": "ljimenez17",
+    "password": "Physics2024Plus",
+    "email": "laura.jimenez@escuela.edu",
+    "phone": "3156789013",
+    "address": "Avenida 56 #24-46",
     "areaOfExpertise": "FISICA"
   },
   {
@@ -374,54 +130,13 @@
     "areaOfExpertise": "QUIMICA"
   },
   {
-    "name": "Santiago Luis",
-    "lastName": "Ortega",
-    "username": "sortega20",
-    "password": "Elements123",
-    "email": "santiago.ortega@escuela.edu",
-    "phone": "3190123456",
-    "address": "Carrera 120 #12-34",
-    "areaOfExpertise": "QUIMICA"
-  },
-  {
-    "name": "Victoria Elena",
-    "lastName": "Aguilar",
-    "username": "vaguilar21",
-    "password": "Molecules24",
-    "email": "victoria.aguilar@escuela.edu",
-    "phone": "3201234567",
-    "address": "Calle 130 #56-78",
-    "areaOfExpertise": "QUIMICA"
-  },
-
-  {
-    "name": "Emma Cristina",
-    "lastName": "Ruiz",
-    "username": "eruiz19",
-    "password": "Chemist15",
-    "email": "emma.ruiz@escuela.edu",
-    "phone": "1018901234",
-    "address": "Avenida 65 #78-90",
-    "areaOfExpertise": "QUIMICA"
-  },
-  {
-    "name": "Carlos Alberto",
-    "lastName": "Torres",
-    "username": "ctorres25",
-    "password": "Reacciones#24",
-    "email": "carlos.torres@escuela.edu",
-    "phone": "1024567890",
-    "address": "Calle 77 #45-67",
-    "areaOfExpertise": "QUIMICA"
-  },
-  {
-    "name": "Valentina Lucía",
-    "lastName": "Gómez",
-    "username": "vgomez27",
-    "password": "Moleculas2024",
-    "email": "valentina.gomez@escuela.edu",
-    "phone": "1012345678",
-    "address": "Carrera 33 #12-34",
+    "name": "Santiago José",
+    "lastName": "Medina",
+    "username": "smedina20",
+    "password": "Chemistry24Plus",
+    "email": "santiago.medina@escuela.edu",
+    "phone": "3189012346",
+    "address": "Avenida 66 #79-91",
     "areaOfExpertise": "QUIMICA"
   },
   {
@@ -435,60 +150,19 @@
     "areaOfExpertise": "BIOLOGIA"
   },
   {
-    "name": "Paulina Andrea",
-    "lastName": "Díaz",
-    "username": "pdiaz23",
-    "password": "Genetics123",
-    "email": "paulina.diaz@escuela.edu",
-    "phone": "3223456789",
-    "address": "Carrera 140 #23-45",
-    "areaOfExpertise": "BIOLOGIA"
-  },
-  {
-    "name": "Emilio dev",
-    "lastName": "Ramos",
-    "username": "eradev34",
-    "password": "Evolution23",
-    "email": "emidev.ramos@escuela.edu",
-    "phone": "3234567890",
-    "address": "Calle 150 #67-89",
-    "areaOfExpertise": "BIOLOGIA"
-  },
-
-  {
-    "name": "Emilio José",
-    "lastName": "Ramos",
-    "username": "eramos24",
-    "password": "Evolution24",
-    "email": "emilio.ramos@escuela.edu",
-    "phone": "1024567880",
-    "address": "Calle 150 #67-89",
-    "areaOfExpertise": "BIOLOGIA"
-  },
-  {
-    "name": "Laura Beatriz",
-    "lastName": "Mendoza",
-    "username": "lmendoza30",
-    "password": "CellLife2024",
-    "email": "laura.mendoza@escuela.edu",
-    "phone": "1025678901",
-    "address": "Carrera 60 #34-56",
-    "areaOfExpertise": "BIOLOGIA"
-  },
-  {
-    "name": "Andrés Felipe",
-    "lastName": "Castaño",
-    "username": "acastano31",
-    "password": "Genetics#24",
-    "email": "andres.castano@escuela.edu",
-    "phone": "1016789012",
-    "address": "Avenida 44 #23-45",
+    "name": "Mariana Sofía",
+    "lastName": "Rojas",
+    "username": "mrojas23",
+    "password": "Biology2024Plus",
+    "email": "mariana.rojas@escuela.edu",
+    "phone": "3212345679",
+    "address": "Avenida 76 #91-13",
     "areaOfExpertise": "BIOLOGIA"
   },
   {
     "name": "Lucía Fernanda",
     "lastName": "Silva",
-    "username": "vieja lesbiana",
+    "username": "lsilva25",
     "password": "Arts2034!",
     "email": "lucia.devsilva@escuela.edu",
     "phone": "3245678901",
@@ -496,115 +170,14 @@
     "areaOfExpertise": "ARTES"
   },
   {
-    "name": "Tomás Alej",
-    "lastName": "Medina",
-    "username": "tmedina26",
-    "password": "Painting123",
-    "email": "tomas.medina@escuela.edu",
-    "phone": "3256789012",
-    "address": "Carrera 160 #78-90",
+    "name": "Samuel Nicolás",
+    "lastName": "Morales",
+    "username": "smorales26",
+    "password": "Arts2034Plus",
+    "email": "samuel.morales@escuela.edu",
+    "phone": "3245678902",
+    "address": "Avenida 86 #35-57",
     "areaOfExpertise": "ARTES"
-  },
-  {
-    "name": "Renata María",
-    "lastName": "Romero",
-    "username": "rromero27",
-    "password": "Sculpture24",
-    "email": "renata.romero@escuela.edu",
-    "phone": "3267890123",
-    "address": "Calle 170 #12-34",
-    "areaOfExpertise": "ARTES"
-  },
-
-  {
-    "name": "Viviana Marcela",
-    "lastName": "Silva",
-    "username": "lsilva25",
-    "password": "Arts2024!",
-    "email": "lucia.silva@escuela.edu",
-    "phone": "1014567890",
-    "address": "Avenida 85 #34-56",
-    "areaOfExpertise": "ARTES"
-  },
-  {
-    "name": "Tomás Alejandro",
-    "lastName": "Vargas",
-    "username": "tvargas28",
-    "password": "Pintura#24",
-    "email": "tomas.vargas@escuela.edu",
-    "phone": "3919876543",
-    "address": "Calle 95 #67-88",
-    "areaOfExpertise": "ARTES"
-  },
-  {
-    "name": "María Antonia",
-    "lastName": "Lozano",
-    "username": "mlozano26",
-    "password": "Dibujo2024",
-    "email": "maria.lozano@escuela.edu",
-    "phone": "1023456789",
-    "address": "Carrera 70 #12-34",
-    "areaOfExpertise": "ARTES"
-  },
-  {
-    "name": "Nicolás David",
-    "lastName": "Guerrero",
-    "username": "nguerrero28",
-    "password": "Music2024!",
-    "email": "nicolas.guerrero@escuela.edu",
-    "phone": "3278901234",
-    "address": "Avenida 95 #56-78",
-    "areaOfExpertise": "MUSICA"
-  },
-  {
-    "name": "Alejandra miguela",
-    "lastName": "Moreno",
-    "username": "amoreno29",
-    "password": "Symphony123",
-    "email": "alejandra.moreno@escuela.edu",
-    "phone": "3289012345",
-    "address": "Carrera 180 #90-12",
-    "areaOfExpertise": "MUSICA"
-  },
-  {
-    "name": "Maximiliano José",
-    "lastName": "Vega",
-    "username": "mvega20",
-    "password": "Classer24",
-    "email": "maxi.vega@escuela.edu",
-    "phone": "3290123456",
-    "address": "Calle 190 #23-45",
-    "areaOfExpertise": "MUSICA"
-  },
-  {
-    "name": "Maximiliano",
-    "lastName": "Vega",
-    "username": "mvega30",
-    "password": "Classical24",
-    "email": "maximiliano.vega@escuela.edu",
-    "phone": "1010123456",
-    "address": "Calle 190 #23-45",
-    "areaOfExpertise": "MUSICA"
-  },
-  {
-    "name": "Camila Alejandra",
-    "lastName": "Moreno",
-    "username": "cmoreno31",
-    "password": "Melody2024!",
-    "email": "camila.moreno@escuela.edu",
-    "phone": "1022345678",
-    "address": "Avenida 100 #12-34",
-    "areaOfExpertise": "MUSICA"
-  },
-  {
-    "name": "Santiago Elías",
-    "lastName": "Mejía",
-    "username": "smejia33",
-    "password": "Notas#2024",
-    "email": "santiago.mejia@escuela.edu",
-    "phone": "1013456789",
-    "address": "Carrera 45 #67-89",
-    "areaOfExpertise": "MUSICA"
   },
   {
     "name": "Catalina Andrea",
@@ -617,54 +190,13 @@
     "areaOfExpertise": "INFORMATICA"
   },
   {
-    "name": "Federico Luis",
-    "lastName": "Castro",
-    "username": "fcastro32",
-    "password": "Coding123",
-    "email": "federico.castro@escuela.edu",
-    "phone": "3312345678",
-    "address": "Carrera 200 #34-56",
-    "areaOfExpertise": "INFORMATICA"
-  },
-  {
-    "name": "Valeria Isabel",
-    "lastName": "Flores",
-    "username": "vflores33",
-    "password": "Software24",
-    "email": "valeria.flores@escuela.edu",
-    "phone": "3323456789",
-    "address": "Calle 210 #78-90",
-    "areaOfExpertise": "INFORMATICA"
-  },
-
-  {
-    "name": "Thiago Manuel",
-    "lastName": "Salcedo",
-    "username": "tsalcedo37",
-    "password": "Backend2024!",
-    "email": "thiago.salcedo@escuela.edu",
-    "phone": "1031234567",
-    "address": "Calle 230 #45-67",
-    "areaOfExpertise": "INFORMATICA"
-  },
-  {
-    "name": "Juliana Estefanía",
-    "lastName": "Navarrete",
-    "username": "jnavarrete38",
-    "password": "Frontend@24",
-    "email": "juliana.navarrete@escuela.edu",
-    "phone": "1042345678",
-    "address": "Carrera 105 #12-89",
-    "areaOfExpertise": "INFORMATICA"
-  },
-  {
-    "name": "Iván Ricardo",
-    "lastName": "Peñaranda",
-    "username": "ipenaranda39",
-    "password": "FullStack24$",
-    "email": "ivan.penaranda@escuela.edu",
-    "phone": "1053456789",
-    "address": "Avenida 145 #78-01",
+    "name": "Miguel Ángel",
+    "lastName": "Rivera",
+    "username": "mrivera32",
+    "password": "Programming24Plus",
+    "email": "miguel.rivera@escuela.edu",
+    "phone": "3301234568",
+    "address": "Avenida 106 #68-90",
     "areaOfExpertise": "INFORMATICA"
   },
   {
@@ -678,54 +210,13 @@
     "areaOfExpertise": "FILOSOFIA"
   },
   {
-    "name": "Esperanza María",
+    "name": "Gabriela Alexandra",
     "lastName": "Navarro",
-    "username": "enavarro35",
-    "password": "Wisdom123",
-    "email": "esperanza.navarro@escuela.edu",
-    "phone": "3345678901",
-    "address": "Carrera 220 #56-78",
-    "areaOfExpertise": "FILOSOFIA"
-  },
-  {
-    "name": "Leonardo David",
-    "lastName": "Ibáñez",
-    "username": "libanez36",
-    "password": "Ethics2024",
-    "email": "leonardo.ibanez@escuela.edu",
-    "phone": "3356789012",
-    "address": "Calle 230 #90-12",
-    "areaOfExpertise": "FILOSOFIA"
-  },
-
-  {
-    "name": "Gabriel Tomás",
-    "lastName": "Almanza",
-    "username": "gtalmanza40",
-    "password": "Socrates24!",
-    "email": "gabriel.almanza@escuela.edu",
-    "phone": "1091234567",
-    "address": "Calle 240 #45-67",
-    "areaOfExpertise": "FILOSOFIA"
-  },
-  {
-    "name": "Renata Alejandra",
-    "lastName": "Valverde",
-    "username": "rvalverde41",
-    "password": "Platon@24",
-    "email": "renata.valverde@escuela.edu",
-    "phone": "1102345600",
-    "address": "Carrera 200 #78-90",
-    "areaOfExpertise": "FILOSOFIA"
-  },
-  {
-    "name": "Matías Elías",
-    "lastName": "Domenech",
-    "username": "mdomenech42",
-    "password": "Nietzsche24$",
-    "email": "matias.domenech@escuela.edu",
-    "phone": "1113456789",
-    "address": "Avenida 170 #12-34",
+    "username": "gnavarro35",
+    "password": "Philosophy24Plus",
+    "email": "gabriela.navarro@escuela.edu",
+    "phone": "3334567891",
+    "address": "Avenida 116 #13-35",
     "areaOfExpertise": "FILOSOFIA"
   },
   {
@@ -739,477 +230,53 @@
     "areaOfExpertise": "ECONOMIA"
   },
   {
-    "name": "Benjamín Luis",
-    "lastName": "Cortés",
-    "username": "bcortes38",
-    "password": "Finance123",
-    "email": "benjamin.cortes@escuela.edu",
-    "phone": "3378901234",
-    "address": "Carrera 240 #67-89",
+    "name": "Joaquín Eduardo",
+    "lastName": "Castillo",
+    "username": "jcastillo38",
+    "password": "Economy2024Plus",
+    "email": "joaquin.castillo@escuela.edu",
+    "phone": "3367890124",
+    "address": "Avenida 126 #24-46",
     "areaOfExpertise": "ECONOMIA"
-  },
-  {
-    "name": "Francisca Elena",
-    "lastName": "Mendez",
-    "username": "fmendez39",
-    "password": "Market2024",
-    "email": "francisca.mendez@escuela.edu",
-    "phone": "3389012345",
-    "address": "Calle 250 #34-56",
-    "areaOfExpertise": "ECONOMIA"
-  },
-
-  {
-    "name": "Tomás Eduardo",
-    "lastName": "Arbeláez",
-    "username": "tarbelaez43",
-    "password": "Finance2024!",
-    "email": "tomas.arbelaez@escuela.edu",
-    "phone": "1124567890",
-    "address": "Avenida 260 #67-89",
-    "areaOfExpertise": "ECONOMIA"
-  },
-  {
-    "name": "Julieta Camila",
-    "lastName": "Castrillón",
-    "username": "jcastrillon44",
-    "password": "Economics24@",
-    "email": "julieta.castrillon@escuela.edu",
-    "phone": "1135678901",
-    "address": "Carrera 300 #12-34",
-    "areaOfExpertise": "ECONOMIA"
-  },
-  {
-    "name": "Santiago Iván",
-    "lastName": "Tobón",
-    "username": "stobon45",
-    "password": "MacroEco24$",
-    "email": "santiago.tobon@escuela.edu",
-    "phone": "1146789012",
-    "address": "Calle 280 #90-12",
-    "areaOfExpertise": "ECONOMIA"
-  },
-  {
-    "name": "Ignacio Miguel",
-    "lastName": "Restrepo",
-    "username": "irestrepo40",
-    "password": "Society2024",
-    "email": "ignacio.restrepo@escuela.edu",
-    "phone": "3390123456",
-    "address": "Avenida 135 #78-90",
-    "areaOfExpertise": "SOCIOLOGIA"
-  },
-  {
-    "name": "Isadora Andrea",
-    "lastName": "Campos",
-    "username": "icampos41",
-    "password": "Social123",
-    "email": "isadora.campos@escuela.edu",
-    "phone": "3401234567",
-    "address": "Carrera 260 #12-34",
-    "areaOfExpertise": "SOCIOLOGIA"
-  },
-  {
-    "name": "Patricio José",
-    "lastName": "Lozano",
-    "username": "plozano42",
-    "password": "Culture24",
-    "email": "patricio.lozano@escuela.edu",
-    "phone": "3412345678",
-    "address": "Calle 270 #56-78",
-    "areaOfExpertise": "SOCIOLOGIA"
-  },
-  {
-    "name": "Camila Teresa",
-    "lastName": "Salamanca",
-    "username": "csalamanca46",
-    "password": "Society2024!",
-    "email": "camila.salamanca@escuela.edu",
-    "phone": "1157890123",
-    "address": "Carrera 310 #45-67",
-    "areaOfExpertise": "SOCIOLOGIA"
-  },
-  {
-    "name": "Esteban Mark",
-    "lastName": "Benítez",
-    "username": "ebenitez47",
-    "password": "Anthro2024@",
-    "email": "esteban.benitez@escuela.edu",
-    "phone": "1168901234",
-    "address": "Avenida 295 #78-90",
-    "areaOfExpertise": "SOCIOLOGIA"
-  },
-  {
-    "name": "Lorena Beatriz",
-    "lastName": "Cuéllar",
-    "username": "lcuellar48",
-    "password": "Struct24$",
-    "email": "lorena.cuellar@escuela.edu",
-    "phone": "1179012345",
-    "address": "Calle 320 #90-13",
-    "areaOfExpertise": "SOCIOLOGIA"
   },
   {
     "name": "Constanza María",
-    "lastName": "Peña",
-    "username": "cpena43",
-    "password": "Sports2024",
-    "email": "constanza.pena@escuela.edu",
-    "phone": "3423456789",
-    "address": "Avenida 145 #90-12",
+    "lastName": "Molina",
+    "username": "cmolina40",
+    "password": "PhysicalEd24",
+    "email": "constanza.molina@escuela.edu",
+    "phone": "3400123456",
+    "address": "Avenida 135 #34-56",
     "areaOfExpertise": "EDUCACION_FISICA"
   },
   {
-    "name": "Esteban David",
+    "name": "Felipe Alejandro",
+    "lastName": "Reyes",
+    "username": "freyes41",
+    "password": "PhysicalEd24Plus",
+    "email": "felipe.reyes@escuela.edu",
+    "phone": "3400123457",
+    "address": "Avenida 136 #35-57",
+    "areaOfExpertise": "EDUCACION_FISICA"
+  },
+  {
+    "name": "Emilia Antonia",
     "lastName": "Acosta",
-    "username": "eacosta44",
-    "password": "Fitness123",
-    "email": "esteban.acosta@escuela.edu",
+    "username": "eacosta43",
+    "password": "Literature24",
+    "email": "emilia.acosta@escuela.edu",
     "phone": "3434567890",
-    "address": "Carrera 280 #23-45",
-    "areaOfExpertise": "EDUCACION_FISICA"
-  },
-  {
-    "name": "Julieta Sofía",
-    "lastName": "Quintero",
-    "username": "jquintero45",
-    "password": "Athletic24",
-    "email": "julieta.quintero@escuela.edu",
-    "phone": "3445678901",
-    "address": "Calle 290 #67-89",
-    "areaOfExpertise": "EDUCACION_FISICA"
-  },
-
-  {
-    "name": "Martín Alejandro",
-    "lastName": "Guzmán",
-    "username": "mguzman49",
-    "password": "Fitness2024!",
-    "email": "martin.guzman@escuela.edu",
-    "phone": "1182345678",
-    "address": "Calle 305 #45-67",
-    "areaOfExpertise": "EDUCACION_FISICA"
-  },
-  {
-    "name": "Daniela Renata",
-    "lastName": "Morales",
-    "username": "dmorales50",
-    "password": "PhysEd24@",
-    "email": "daniela.morales@escuela.edu",
-    "phone": "1193456789",
-    "address": "Carrera 325 #56-78",
-    "areaOfExpertise": "EDUCACION_FISICA"
-  },
-  {
-    "name": "Gabriel Nicolás",
-    "lastName": "Vallejo",
-    "username": "gvallejo51",
-    "password": "Sporty24$",
-    "email": "gabriel.vallejo@escuela.edu",
-    "phone": "1104567890",
-    "address": "Avenida 330 #67-89",
-    "areaOfExpertise": "EDUCACION_FISICA"
-  },
-  {
-    "name": "Octavio Luis",
-    "lastName": "Palacios",
-    "username": "opalacios46",
-    "password": "Litxrat234",
-    "email": "octavio.palacios@escuela.edu",
-    "phone": "3456789012",
-    "address": "Avenida 155 #34-56",
+    "address": "Avenida 145 #45-67",
     "areaOfExpertise": "LITERATURA"
   },
   {
-    "name": "Florencia Elena",
-    "lastName": "Escobar",
-    "username": "fescobar47",
-    "password": "Poetry123",
-    "email": "florencia.escobar@escuela.edu",
-    "phone": "3467890123",
-    "address": "Carrera 300 #78-90",
-    "areaOfExpertise": "LITERATURA"
-  },
-  {
-    "name": "Aurelio Miguel",
-    "lastName": "Cardona",
-    "username": "acardona48",
-    "password": "Novels2024",
-    "email": "aurelio.cardona@escuela.edu",
-    "phone": "3478901234",
-    "address": "Calle 310 #12-34",
-    "areaOfExpertise": "LITERATURA"
-  },
-  {
-    "name": "Camila Antonella",
-    "lastName": "Salcedo",
-    "username": "csalcedo52",
-    "password": "Books2024!",
-    "email": "camila.salcedo@escuela.edu",
-    "phone": "1123456789",
-    "address": "Carrera 350 #45-67",
-    "areaOfExpertise": "LITERATURA"
-  },
-  {
-    "name": "Tomás Emanuel",
-    "lastName": "Zapata",
-    "username": "tzapata53",
-    "password": "Reading24@",
-    "email": "tomas.zapata@escuela.edu",
-    "phone": "1134567880",
-    "address": "Avenida 360 #56-78",
-    "areaOfExpertise": "LITERATURA"
-  },
-  {
-    "name": "Valentina Abril",
-    "lastName": "Delgado",
-    "username": "vdelgado54",
-    "password": "Poetry2024$",
-    "email": "valentina.delgado@escuela.edu",
-    "phone": "1145678901",
-    "address": "Calle 370 #67-89",
-    "areaOfExpertise": "LITERATURA"
-  },
-  {
-    "name": "Esperanza José",
-    "lastName": "Villanueva",
-    "username": "evillanueva49",
-    "password": "Spanish2024",
-    "email": "esperanza.villanueva@escuela.edu",
-    "phone": "3489012345",
-    "address": "Avenida 165 #56-78",
-    "areaOfExpertise": "ESPANOL"
-  },
-  {
-    "name": "Agustín David",
-    "lastName": "Sandoval",
-    "username": "asandoval50",
-    "password": "Grammar24",
-    "email": "agustin.sandoval@escuela.edu",
-    "phone": "3490123456",
-    "address": "Carrera 320 #90-12",
-    "areaOfExpertise": "ESPANOL"
-  },
-  {
-    "name": "Celeste Andrea",
-    "lastName": "Maldonado",
-    "username": "cmaldonado51",
-    "password": "Cervantes123",
-    "email": "celeste.maldonado@escuela.edu",
-    "phone": "3501234567",
-    "address": "Calle 330 #23-45",
-    "areaOfExpertise": "ESPANOL"
-  },
-  {
-    "name": "Martín Elías",
-    "lastName": "Guzmán",
-    "username": "mguzman55",
-    "password": "Gramatica2024!",
-    "email": "martgram.guzman@escuela.edu",
-    "phone": "1156789012",
-    "address": "Avenida 380 #12-34",
-    "areaOfExpertise": "ESPANOL"
-  },
-  {
-    "name": "Reis Alejandra",
+    "name": "Tomás Gabriel",
     "lastName": "Fuentes",
-    "username": "rfuentes56",
-    "password": "Ortografia24@",
-    "email": "renata.fuentes@escuela.edu",
-    "phone": "1167890123",
-    "address": "Calle 390 #45-67",
-    "areaOfExpertise": "ESPANOL"
-  },
-  {
-    "name": "Santiago Nicolás",
-    "lastName": "Moreno",
-    "username": "smoreno57",
-    "password": "Lengua2024#",
-    "email": "santiago.moreno@escuela.edu",
-    "phone": "1178901234",
-    "address": "Carrera 400 #56-78",
-    "areaOfExpertise": "ESPANOL"
-  },
-  {
-    "name": "Maximiliano david",
-    "lastName": "Vásquez",
-    "username": "mvasquez52",
-    "password": "French2024",
-    "email": "maximiliano.vasquez2@escuela.edu",
-    "phone": "3512345678",
-    "address": "Avenida 175 #67-89",
-    "areaOfExpertise": "FRANCES"
-  },
-  {
-    "name": "Valentina María",
-    "lastName": "Bermúdez",
-    "username": "vbermudez53",
-    "password": "Francais123",
-    "email": "valentina.bermudez@escuela.edu",
-    "phone": "3523456789",
-    "address": "Carrera 340 #34-56",
-    "areaOfExpertise": "FRANCES"
-  },
-  {
-    "name": "Salvador Luis",
-    "lastName": "Figueroa",
-    "username": "sfigueroa54",
-    "password": "Bonjour24",
-    "email": "salvador.figueroa@escuela.edu",
-    "phone": "3534567890",
-    "address": "Calle 350 #78-90",
-    "areaOfExpertise": "FRANCES"
-  },
-
-  {
-    "name": "Camille Juliana",
-    "lastName": "Benítez",
-    "username": "cbenitez58",
-    "password": "Paris2024!",
-    "email": "camille.benitez@escuela.edu",
-    "phone": "1189012345",
-    "address": "Avenida 360 #12-34",
-    "areaOfExpertise": "FRANCES"
-  },
-  {
-    "name": "Thiago Emmanuel",
-    "lastName": "Salazar",
-    "username": "tsalazar59",
-    "password": "Francais24@",
-    "email": "thiago.salazar@escuela.edu",
-    "phone": "1190123456",
-    "address": "Calle 370 #45-67",
-    "areaOfExpertise": "FRANCES"
-  },
-  {
-    "name": "Aurora Daniela",
-    "lastName": "Peña",
-    "username": "apena60",
-    "password": "Louvre#2024",
-    "email": "aurora.pena@escuela.edu",
-    "phone": "1134567830",
-    "address": "Carrera 380 #56-78",
-    "areaOfExpertise": "FRANCES"
-  },
-  {
-    "name": "Magdalena Elena",
-    "lastName": "Arango",
-    "username": "marango55",
-    "password": "Health2024",
-    "email": "magdalena.arango@escuela.edu",
-    "phone": "3545678901",
-    "address": "Avenida 185 #12-34",
-    "areaOfExpertise": "SALUD"
-  },
-  {
-    "name": "Sebastián Miguel",
-    "lastName": "Cabrera",
-    "username": "scabrera56",
-    "password": "Medicine123",
-    "email": "sebastian.cabrera@escuela.edu",
-    "phone": "3556789012",
-    "address": "Carrera 360 #56-78",
-    "areaOfExpertise": "SALUD"
-  },
-  {
-    "name": "Pilar Andrea",
-    "lastName": "Herrera",
-    "username": "pherrera57",
-    "password": "Wellness24",
-    "email": "pilar.herrera@escuela.edu",
-    "phone": "3567890123",
-    "address": "Calle 370 #90-12",
-    "areaOfExpertise": "SALUD"
-  },
-  {
-    "name": "Esteban Mauricio",
-    "lastName": "Coronado",
-    "username": "ecoronado61",
-    "password": "Vida2024#",
-    "email": "esteban.coronado@escuela.edu",
-    "phone": "1156789013",
-    "address": "Calle 380 #45-67",
-    "areaOfExpertise": "SALUD"
-  },
-  {
-    "name": "Gabriela Renata",
-    "lastName": "Zamora",
-    "username": "gzamora62",
-    "password": "Saludable24!",
-    "email": "gabriela.zamora@escuela.edu",
-    "phone": "3867890123",
-    "address": "Avenida 390 #67-89",
-    "areaOfExpertise": "SALUD"
-  },
-  {
-    "name": "Tomás homero",
-    "lastName": "Mejía",
-    "username": "tmejia63",
-    "password": "Cuidado24*",
-    "email": "tomas.mejia@escuela.edu",
-    "phone": "1178901290",
-    "address": "Carrera 400 #12-34",
-    "areaOfExpertise": "SALUD"
-  },
-  {
-    "name": "Cristóbal José",
-    "lastName": "Montenegro",
-    "username": "cmontenegro58",
-    "password": "Technology24",
-    "email": "cristobal.montenegro@escuela.edu",
-    "phone": "3578901234",
-    "address": "Avenida 195 #23-45",
-    "areaOfExpertise": "TECNOLOGIA"
-  },
-  {
-    "name": "Esperanza David",
-    "lastName": "Carrillo",
-    "username": "ecarrillo59",
-    "password": "Innovation123",
-    "email": "esperanza.carrillo@escuela.edu",
-    "phone": "3589012345",
-    "address": "Carrera 380 #67-89",
-    "areaOfExpertise": "TECNOLOGIA"
-  },
-  {
-    "name": "Tadeo Luis",
-    "lastName": "Bautista",
-    "username": "tbautista60",
-    "password": "Digital2024",
-    "email": "tadeo.bautista@escuela.edu",
-    "phone": "3590123456",
-    "address": "Calle 390 #34-56",
-    "areaOfExpertise": "TECNOLOGIA"
-  },
-  {
-    "name": "Camilo Esteban",
-    "lastName": "Montoya",
-    "username": "cmontoya61",
-    "password": "TechGuru24",
-    "email": "camilo.montoya@escuela.edu",
-    "phone": "1102345678",
-    "address": "Calle 400 #45-67",
-    "areaOfExpertise": "TECNOLOGIA"
-  },
-  {
-    "name": "Marina Beatriz",
-    "lastName": "Zapata",
-    "username": "mzapata62",
-    "password": "CodeFuture24",
-    "email": "marina.zapata@escuela.edu",
-    "phone": "0023456789",
-    "address": "Calle 420 #78-90",
-    "areaOfExpertise": "TECNOLOGIA"
-  },
-  {
-    "name": "Esteban Rafael",
-    "lastName": "Cortés",
-    "username": "ecortes63",
-    "password": "DevWorld24",
-    "email": "esteban.cortes@escuela.edu",
-    "phone": "1134567890",
-    "address": "Calle 440 #56-78",
-    "areaOfExpertise": "TECNOLOGIA"
+    "username": "tfuentes44",
+    "password": "Literature24Plus",
+    "email": "tomas.fuentes@escuela.edu",
+    "phone": "3434567891",
+    "address": "Avenida 146 #46-68",
+    "areaOfExpertise": "LITERATURA"
   }
-
 ]
