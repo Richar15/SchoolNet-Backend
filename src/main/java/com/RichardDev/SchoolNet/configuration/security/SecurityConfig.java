@@ -29,53 +29,48 @@ public class SecurityConfig {
     private final CustomUserDetailsService userDetailsService;
 
 
-@Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    return http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                    // Permitir acceso a endpoints de Swagger/OpenAPI
-                    .requestMatchers("/swagger-ui/**").permitAll()
-                    .requestMatchers("/v3/api-docs/**").permitAll()
-                    .requestMatchers("/swagger-resources/**").permitAll()
-                    .requestMatchers("/webjars/**").permitAll()
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
 
-                    // Endpoints públicos de autenticación
-                    .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**").permitAll()
+                        .requestMatchers("/swagger-resources/**").permitAll()
+                        .requestMatchers("/webjars/**").permitAll()
 
-                    // Endpoints de ESTUDIANTES
-                    .requestMatchers(HttpMethod.POST, "/api/students/create").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/api/students/search").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/api/students").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.PUT, "/api/students/**").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.DELETE, "/api/students/**").hasRole("ADMIN")
+                        .requestMatchers("/api/auth/**").permitAll()
 
-                    // Endpoints de PROFESORES - mismo patrón que estudiantes
-                    .requestMatchers(HttpMethod.POST, "/api/teachers/create").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/api/teachers/search").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/api/teachers").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.PUT, "/api/teachers/**").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.DELETE, "/api/teachers/**").hasRole("ADMIN")
 
-                    // Endpoints de HORARIOS
-                    .requestMatchers(HttpMethod.GET, "/api/schedules/**").hasAnyRole("ADMIN", "TEACHER", "STUDENT")
-                    .requestMatchers(HttpMethod.POST, "/api/schedules/**").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.PUT, "/api/schedules/**").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.DELETE, "/api/schedules/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/students/create").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/students/search").hasAnyRole("ADMIN", "TEACHER")
+                        .requestMatchers(HttpMethod.GET, "/api/students").hasAnyRole("ADMIN", "TEACHER")
+                        .requestMatchers(HttpMethod.PUT, "/api/students/**").hasRole("STUDENT")
+                        .requestMatchers(HttpMethod.DELETE, "/api/students/**").hasRole("ADMIN")
 
-                    // Endpoints específicos por rol
-                    .requestMatchers("/api/teacher/**").hasAnyRole("TEACHER", "ADMIN")
-                    .requestMatchers("/api/student/**").hasAnyRole("STUDENT", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/teachers/create").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/teachers/search").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/teachers").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/teachers/**").hasAnyRole("ADMIN", "TEACHER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/teachers/**").hasRole("ADMIN")
 
-                    .anyRequest().authenticated()
-            )
-            .sessionManagement(session -> session
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            )
-            .authenticationProvider(authenticationProvider())
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-            .build();
-}
+
+                        .requestMatchers(HttpMethod.GET, "/api/schedules/**").hasAnyRole("ADMIN", "TEACHER", "STUDENT")
+                        .requestMatchers(HttpMethod.POST, "/api/schedules/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/schedules/**").hasRole("ADMIN")
+
+
+                        .anyRequest().authenticated()
+                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
+    }
+
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();

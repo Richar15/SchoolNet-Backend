@@ -9,6 +9,7 @@ import com.RichardDev.SchoolNet.persistence.repository.StudentRepository;
 import com.RichardDev.SchoolNet.persistence.repository.TeacherRepository;
 import com.RichardDev.SchoolNet.presentation.dto.AuthResponseDTO;
 import com.RichardDev.SchoolNet.presentation.dto.LoginRequestDTO;
+import com.RichardDev.SchoolNet.service.exeption.CredencialesInvalidasException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,13 +30,16 @@ public class AuthService {
     private final AdminRepository adminRepository;
 
     public AuthResponseDTO login(LoginRequestDTO request) {
-
-        authenticationManager.authenticate(
+        try {
+            authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
-                        request.getPassword()
+                    request.getUsername(),
+                    request.getPassword()
                 )
-        );
+            );
+        } catch (Exception e) {
+            throw new CredencialesInvalidasException("Usuario o contraseña incorrectos");
+        }
 
         // Cargar detalles del usuario
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
@@ -71,4 +75,4 @@ public class AuthService {
                 .userId(userId)
                 .build();
     }
-}
+    }
