@@ -12,4 +12,5 @@ public class SchoolNetApplication {
 		SpringApplication.run(SchoolNetApplication.class, args);
 	}
 
+
 }

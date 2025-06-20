@@ -49,6 +49,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/students/**").hasRole("STUDENT")
                         .requestMatchers(HttpMethod.DELETE, "/api/students/**").hasRole("ADMIN")
 
+
                         .requestMatchers(HttpMethod.POST, "/api/teachers/create").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/teachers/search").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/teachers").hasRole("ADMIN")
@@ -56,11 +57,14 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/teachers/**").hasRole("ADMIN")
 
 
-                        .requestMatchers(HttpMethod.GET, "/api/schedules/**").hasAnyRole("ADMIN", "TEACHER", "STUDENT")
-                        .requestMatchers(HttpMethod.POST, "/api/schedules/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/schedules/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/schedules/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/schedules/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/api/schedules/**").permitAll()
 
-
+                        .requestMatchers(HttpMethod.POST, "/api/grades/assign").hasRole("TEACHER")
+                        .requestMatchers(HttpMethod.GET, "/api/grades/gradeOfStudent").hasRole("STUDENT")
+                        .requestMatchers(HttpMethod.GET, "/api/grades/studentsByAssignment").hasRole("TEACHER")
+                        .requestMatchers(HttpMethod.GET, "/api/grades/gradesAssignedByProfessor").hasRole("TEACHER")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

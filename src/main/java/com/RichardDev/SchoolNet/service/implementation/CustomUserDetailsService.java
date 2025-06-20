@@ -58,4 +58,23 @@ public class CustomUserDetailsService implements UserDetailsService {
         );
     }
 
+    public Long getUserIdFromUsername(String username) throws UsernameNotFoundException {
+        Optional<StudentEntity> student = studentRepository.findByUsername(username);
+        if (student.isPresent()) {
+            return student.get().getId();
+        }
+
+        Optional<TeacherEntity> teacher = teacherRepository.findByUsername(username);
+        if (teacher.isPresent()) {
+            return teacher.get().getId();
+        }
+
+        Optional<AdminEntity> admin = adminRepository.findByUsername(username);
+        if (admin.isPresent()) {
+            return admin.get().getId();
+        }
+
+        throw new UsernameNotFoundException("Usuario no encontrado: " + username);
+    }
+
 }

@@ -1,9 +1,12 @@
 package com.RichardDev.SchoolNet.presentation.controller;
 
-import com.RichardDev.SchoolNet.presentation.dto.StudentDto;
+import com.RichardDev.SchoolNet.presentation.dto.GradeDTO;
+import com.RichardDev.SchoolNet.presentation.dto.StudentDTO;
+import com.RichardDev.SchoolNet.presentation.dto.StudentGradeDto;
 import com.RichardDev.SchoolNet.service.implementation.StudentServiceimpl;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,24 +19,24 @@ public class StudentController {
     private final StudentServiceimpl studentServiceimpl;
 
     @PostMapping("create")
-    public StudentDto create(@RequestBody @Valid StudentDto dto) {
+    public StudentDTO create(@RequestBody @Valid StudentDTO dto) {
         return studentServiceimpl.create(dto);
     }
 
     @PutMapping("/{id}")
-    public StudentDto update(@PathVariable Long id, @RequestBody @Valid StudentDto dto) {
+    public StudentDTO update(@PathVariable Long id, @RequestBody @Valid StudentDTO dto) {
         return studentServiceimpl.update(id, dto);
     }
 
 
     @GetMapping("/search")
-    public List<StudentDto> searchByKeyword(@RequestParam String keyword) {
+    public List<StudentDTO> searchByKeyword(@RequestParam String keyword) {
         return studentServiceimpl.searchByKeyword(keyword);
     }
 
 
     @GetMapping
-    public List<StudentDto> getAll() {
+    public List<StudentDTO> getAll() {
         return studentServiceimpl.getAll();
     }
 
@@ -41,5 +44,8 @@ public class StudentController {
     public void delete(@PathVariable Long id) {
         studentServiceimpl.delete(id);
     }
+
+
+
 
 }
