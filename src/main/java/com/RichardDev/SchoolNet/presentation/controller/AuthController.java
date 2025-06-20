@@ -20,12 +20,6 @@ public class AuthController {
 
    @PostMapping("/login")
    public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginRequestDTO request) {
-       AuthResponseDTO response = authService.login(request);
-
-       if (response.isError()) {
-           return ResponseEntity.status(response.getStatus()).body(response);
        }
 
-       return ResponseEntity.ok(response);
-   }
 }

@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -17,10 +15,4 @@ public class AuthResponseDTO {
     private String username;
     private String rol;
     private Long userId;
-
-    private boolean error;
-    private String mensaje;
-    private int status;
-    private LocalDateTime timestamp;
-
 }

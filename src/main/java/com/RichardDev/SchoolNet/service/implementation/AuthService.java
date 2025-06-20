@@ -9,15 +9,12 @@ import com.RichardDev.SchoolNet.persistence.repository.StudentRepository;
 import com.RichardDev.SchoolNet.persistence.repository.TeacherRepository;
 import com.RichardDev.SchoolNet.presentation.dto.AuthResponseDTO;
 import com.RichardDev.SchoolNet.presentation.dto.LoginRequestDTO;
-import com.RichardDev.SchoolNet.service.exeption.CredencialesInvalidasException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -31,9 +28,7 @@ public class AuthService {
     private final TeacherRepository teacherRepository;
     private final AdminRepository adminRepository;
 
-
     public AuthResponseDTO login(LoginRequestDTO request) {
-        try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             request.getUsername(),
@@ -73,17 +68,6 @@ public class AuthService {
                     .username(request.getUsername())
                     .rol(userRol != null ? userRol.name() : null)
                     .userId(userId)
-                    .error(false)
-                    .build();
-
-        } catch (BadCredentialsException e) {
-            return AuthResponseDTO.builder()
-                    .error(true)
-                    .mensaje("Usuario o contraseña incorrectos")
-                    .status(401)
-                    .timestamp(LocalDateTime.now())
                     .build();
         }
     }
-
-}
