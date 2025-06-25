@@ -29,45 +29,45 @@ public class AuthService {
     private final AdminRepository adminRepository;
 
     public AuthResponseDTO login(LoginRequestDTO request) {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            request.getUsername(),
-                            request.getPassword()
-                    )
-            );
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getUsername(),
+                        request.getPassword()
+                )
+        );
 
-            // Cargar detalles del usuario
-            UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
-            String token = jwtService.generateToken(userDetails);
+        // Cargar detalles del usuario
+        UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
+        String token = jwtService.generateToken(userDetails);
 
-            // Buscar el ID y rol específico
-            Long userId = null;
-            Rol userRol = null;
+        // Buscar el ID y rol específico
+        Long userId = null;
+        Rol userRol = null;
 
-            // Buscar en repositorios
-            Optional<StudentEntity> student = studentRepository.findByUsername(request.getUsername());
-            if (student.isPresent()) {
-                userId = student.get().getId();
-                userRol = student.get().getRol();
+        // Buscar en repositorios
+        Optional<StudentEntity> student = studentRepository.findByUsername(request.getUsername());
+        if (student.isPresent()) {
+            userId = student.get().getId();
+            userRol = student.get().getRol();
+        } else {
+            Optional<TeacherEntity> teacher = teacherRepository.findByUsername(request.getUsername());
+            if (teacher.isPresent()) {
+                userId = teacher.get().getId();
+                userRol = teacher.get().getRol();
             } else {
-                Optional<TeacherEntity> teacher = teacherRepository.findByUsername(request.getUsername());
-                if (teacher.isPresent()) {
-                    userId = teacher.get().getId();
-                    userRol = teacher.get().getRol();
-                } else {
-                    Optional<AdminEntity> admin = adminRepository.findByUsername(request.getUsername());
-                    if (admin.isPresent()) {
-                        userId = admin.get().getId();
-                        userRol = admin.get().getRol();
-                    }
+                Optional<AdminEntity> admin = adminRepository.findByUsername(request.getUsername());
+                if (admin.isPresent()) {
+                    userId = admin.get().getId();
+                    userRol = admin.get().getRol();
                 }
             }
-
-            return AuthResponseDTO.builder()
-                    .token(token)
-                    .username(request.getUsername())
-                    .rol(userRol != null ? userRol.name() : null)
-                    .userId(userId)
-                    .build();
         }
+
+        return AuthResponseDTO.builder()
+                .token(token)
+                .username(request.getUsername())
+                .rol(userRol != null ? userRol.name() : null)
+                .userId(userId)
+                .build();
     }
+}
