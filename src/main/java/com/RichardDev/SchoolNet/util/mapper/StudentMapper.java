@@ -6,6 +6,7 @@ import com.RichardDev.SchoolNet.presentation.dto.StudentDTO;
 public class StudentMapper {
     public static StudentDTO toDto(StudentEntity entity) {
         StudentDTO dto = new StudentDTO();
+        dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setLastName(entity.getLastName());
         dto.setUsername(entity.getUsername());
@@ -18,6 +19,7 @@ public class StudentMapper {
     }
 
     public static void updateEntityFromDto(StudentDTO dto, StudentEntity entity) {
+        if (dto.getId() != null) entity.setId(dto.getId());
         if (dto.getName() != null) entity.setName(dto.getName());
         if (dto.getLastName() != null) entity.setLastName(dto.getLastName());
         if (dto.getUsername() != null) entity.setUsername(dto.getUsername());

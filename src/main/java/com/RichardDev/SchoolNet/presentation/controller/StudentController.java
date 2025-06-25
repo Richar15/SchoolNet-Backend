@@ -23,18 +23,15 @@ public class StudentController {
         return studentServiceimpl.create(dto);
     }
 
-    @PutMapping("/{id}")
-    public StudentDTO update(@PathVariable Long id, @RequestBody @Valid StudentDTO dto) {
-        return studentServiceimpl.update(id, dto);
-    }
-
-
     @GetMapping("/search")
     public List<StudentDTO> searchByKeyword(@RequestParam String keyword) {
         return studentServiceimpl.searchByKeyword(keyword);
     }
 
-
+    @PutMapping("/{id}")
+    public StudentDTO update(@PathVariable Long id, @RequestBody @Valid StudentDTO dto) {
+        return studentServiceimpl.update(id, dto);
+    }
     @GetMapping
     public List<StudentDTO> getAll() {
         return studentServiceimpl.getAll();

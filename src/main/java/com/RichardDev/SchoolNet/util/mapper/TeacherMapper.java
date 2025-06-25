@@ -7,6 +7,7 @@ public class TeacherMapper {
 
     public static TeacherDto toDto(TeacherEntity entity) {
         TeacherDto dto = new TeacherDto();
+        dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setLastName(entity.getLastName());
         dto.setUsername(entity.getUsername());
@@ -19,6 +20,7 @@ public class TeacherMapper {
     }
 
     public static void updateEntityFromDto(TeacherDto dto, TeacherEntity entity) {
+        if (dto.getId() != null) entity.setId(dto.getId());
         if (dto.getName() != null) entity.setName(dto.getName());
         if (dto.getLastName() != null) entity.setLastName(dto.getLastName());
         if (dto.getUsername() != null) entity.setUsername(dto.getUsername());
