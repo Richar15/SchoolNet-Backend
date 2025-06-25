@@ -1,6 +1,5 @@
 package com.RichardDev.SchoolNet.service.interfaces;
 
-import com.RichardDev.SchoolNet.presentation.dto.StudentDto;
 import com.RichardDev.SchoolNet.presentation.dto.TeacherDto;
 
 import java.util.List;

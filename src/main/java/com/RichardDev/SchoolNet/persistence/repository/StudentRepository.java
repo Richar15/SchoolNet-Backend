@@ -1,5 +1,6 @@
 package com.RichardDev.SchoolNet.persistence.repository;
 
+import com.RichardDev.SchoolNet.constant.Grade;
 import com.RichardDev.SchoolNet.persistence.entity.StudentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +19,7 @@ public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
            "LOWER(s.username) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
            "LOWER(s.lastName) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<StudentEntity> searchByKeyword(String keyword);
+
+    List<StudentEntity> findByGrade(Grade grade);
+
 }

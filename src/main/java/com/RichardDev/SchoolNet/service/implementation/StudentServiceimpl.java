@@ -1,8 +1,11 @@
 package com.RichardDev.SchoolNet.service.implementation;
 
+import com.RichardDev.SchoolNet.persistence.entity.ProfessorAssignmentEntity;
 import com.RichardDev.SchoolNet.persistence.entity.StudentEntity;
+import com.RichardDev.SchoolNet.persistence.repository.ProfessorAssignmentRepository;
 import com.RichardDev.SchoolNet.persistence.repository.StudentRepository;
-import com.RichardDev.SchoolNet.presentation.dto.StudentDto;
+import com.RichardDev.SchoolNet.presentation.dto.StudentDTO;
+import com.RichardDev.SchoolNet.presentation.dto.StudentGradeDto;
 import com.RichardDev.SchoolNet.service.exeption.UniqueFieldException;
 import com.RichardDev.SchoolNet.service.exeption.UserNotFoundException;
 import com.RichardDev.SchoolNet.service.interfaces.StudentService;
@@ -22,9 +25,10 @@ public class StudentServiceimpl implements StudentService {
 
     private final StudentRepository studentRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ProfessorAssignmentRepository professorAssignmentRepository;
 
-@Override
-public StudentDto create(StudentDto dto) {
+    @Override
+public StudentDTO create(StudentDTO dto) {
     try {
         StudentEntity entity = StudentMapper.toEntity(dto);
 
@@ -36,7 +40,7 @@ public StudentDto create(StudentDto dto) {
 }
 
    @Override
-   public StudentDto update(Long id, StudentDto dto) {
+   public StudentDTO update(Long id, StudentDTO dto) {
        StudentEntity entity = studentRepository.findById(id).orElse(null);
        if (entity == null) {
            throw new UserNotFoundException("Estudiante no encontrado con id: " + id);
@@ -52,7 +56,7 @@ public StudentDto create(StudentDto dto) {
 
 
     @Override
-    public List<StudentDto> getAll() {
+    public List<StudentDTO> getAll() {
         List<StudentEntity> students = studentRepository.findAll();
         if (students.isEmpty()) {
             throw new UserNotFoundException("No se encontraron estudiantes registrados.");
@@ -63,7 +67,7 @@ public StudentDto create(StudentDto dto) {
     }
 
     @Override
-    public List<StudentDto> searchByKeyword(String keyword) {
+    public List<StudentDTO> searchByKeyword(String keyword) {
         List<StudentEntity> students = studentRepository.searchByKeyword(keyword);
         if (students.isEmpty()) {
             throw new UserNotFoundException("No se econtraron estudiantes que coincidan con: " + keyword);
@@ -77,5 +81,23 @@ public StudentDto create(StudentDto dto) {
     public void delete(Long id) {
         studentRepository.deleteById(id);
     }
+
+
+    public List<StudentGradeDto> getStudentsByAssignment(Long assignmentId) {
+        ProfessorAssignmentEntity assignment = professorAssignmentRepository.findById(assignmentId)
+                .orElseThrow(() -> new RuntimeException("Asignación no encontrada"));
+
+        List<StudentEntity> students = studentRepository.findByGrade(assignment.getGrade());
+
+        return students.stream()
+                .map(s -> {
+                    StudentGradeDto dto = new StudentGradeDto();
+                    dto.setId(s.getId());
+                    dto.setName(s.getName());
+                    return dto;
+                })
+                .collect(Collectors.toList());
+    }
+
 
 }

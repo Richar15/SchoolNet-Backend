@@ -4,8 +4,8 @@ import com.RichardDev.SchoolNet.constant.Grade;
 import lombok.Data;
 
 @Data
-public class StudentDto {
-
+public class StudentDTO {
+    private Long id;
     private String name;
     private String lastName;
     private String username;

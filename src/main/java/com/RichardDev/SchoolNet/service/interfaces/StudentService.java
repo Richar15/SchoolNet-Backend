@@ -1,16 +1,16 @@
 package com.RichardDev.SchoolNet.service.interfaces;
 
-import com.RichardDev.SchoolNet.presentation.dto.StudentDto;
+import com.RichardDev.SchoolNet.presentation.dto.StudentDTO;
 
 import java.util.List;
 
 public interface StudentService {
 
-    StudentDto create(StudentDto dto);
-    StudentDto update(Long id, StudentDto dto);
-    List<StudentDto> getAll();
+    StudentDTO create(StudentDTO dto);
+    StudentDTO update(Long id, StudentDTO dto);
+    List<StudentDTO> getAll();
     void delete(Long id);
-    List<StudentDto> searchByKeyword(String keyword);
+    List<StudentDTO> searchByKeyword(String keyword);
 
 
 }

@@ -1,11 +1,12 @@
 package com.RichardDev.SchoolNet.util.mapper;
 import com.RichardDev.SchoolNet.persistence.entity.StudentEntity;
-import com.RichardDev.SchoolNet.presentation.dto.StudentDto;
+import com.RichardDev.SchoolNet.presentation.dto.StudentDTO;
 
 
 public class StudentMapper {
-    public static StudentDto toDto(StudentEntity entity) {
-        StudentDto dto = new StudentDto();
+    public static StudentDTO toDto(StudentEntity entity) {
+        StudentDTO dto = new StudentDTO();
+        dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setLastName(entity.getLastName());
         dto.setUsername(entity.getUsername());
@@ -17,7 +18,8 @@ public class StudentMapper {
         return dto;
     }
 
-    public static void updateEntityFromDto(StudentDto dto, StudentEntity entity) {
+    public static void updateEntityFromDto(StudentDTO dto, StudentEntity entity) {
+        if (dto.getId() != null) entity.setId(dto.getId());
         if (dto.getName() != null) entity.setName(dto.getName());
         if (dto.getLastName() != null) entity.setLastName(dto.getLastName());
         if (dto.getUsername() != null) entity.setUsername(dto.getUsername());
@@ -28,7 +30,7 @@ public class StudentMapper {
         if (dto.getGrade() != null) entity.setGrade(dto.getGrade());
     }
 
-    public static StudentEntity toEntity(StudentDto dto) {
+    public static StudentEntity toEntity(StudentDTO dto) {
         StudentEntity entity = new StudentEntity();
         updateEntityFromDto(dto, entity);
         return entity;
