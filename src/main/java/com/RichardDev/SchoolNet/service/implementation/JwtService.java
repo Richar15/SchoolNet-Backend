@@ -1,5 +1,6 @@
 package com.RichardDev.SchoolNet.service.implementation;
 
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -37,11 +38,23 @@ public class JwtService {
         return generateToken(new HashMap<>(), userDetails);
     }
 
+    // ✅ MODIFICADO: Ahora incluye el userId en el token
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+
+        // ✅ OBTENER EL ID DEL USUARIO SI ES CustomUserDetails
+        Long userId = null;
+        if (userDetails instanceof CustomUserDetails) {
+            userId = ((CustomUserDetails) userDetails).getId();
+            System.out.println("DEBUG - Generando token para usuario ID: " + userId + ", username: " + userDetails.getUsername());
+        } else {
+            System.out.println("WARNING - UserDetails no es CustomUserDetails, no se puede obtener ID");
+        }
+
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
+                .claim("userId", userId) // ✅ AGREGAR EL userId AL TOKEN
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
@@ -75,22 +88,48 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
+    // ✅ MEJORADO: Mejor manejo de tipos y logging
     public Long extractUserId(String token) {
-        Claims claims = extractAllClaims(token);
-        Object userIdObj = claims.get("userId");
-        if (userIdObj instanceof Integer) {
-            return ((Integer) userIdObj).longValue();
-        }
-        if (userIdObj instanceof Long) {
-            return (Long) userIdObj;
-        }
-        if (userIdObj instanceof String) {
-            try {
-                return Long.parseLong((String) userIdObj);
-            } catch (NumberFormatException e) {
+        try {
+            Claims claims = extractAllClaims(token);
+            Object userIdObj = claims.get("userId");
+
+            System.out.println("DEBUG - extractUserId - userIdObj: " + userIdObj + " (tipo: " + (userIdObj != null ? userIdObj.getClass().getSimpleName() : "null") + ")");
+
+            if (userIdObj == null) {
+                System.out.println("WARNING - userId claim es null en el token");
                 return null;
             }
+
+            if (userIdObj instanceof Integer) {
+                Long result = ((Integer) userIdObj).longValue();
+                System.out.println("DEBUG - userId extraído como Integer->Long: " + result);
+                return result;
+            }
+
+            if (userIdObj instanceof Long) {
+                System.out.println("DEBUG - userId extraído como Long: " + userIdObj);
+                return (Long) userIdObj;
+            }
+
+            if (userIdObj instanceof String) {
+                try {
+                    Long result = Long.parseLong((String) userIdObj);
+                    System.out.println("DEBUG - userId extraído como String->Long: " + result);
+                    return result;
+                } catch (NumberFormatException e) {
+                    System.out.println("ERROR - No se pudo parsear userId como Long: " + userIdObj);
+                    return null;
+                }
+            }
+
+            System.out.println("ERROR - Tipo de userId no soportado: " + userIdObj.getClass().getSimpleName());
+            return null;
+
+        } catch (Exception e) {
+            System.out.println("ERROR - Excepción al extraer userId: " + e.getMessage());
+            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 }

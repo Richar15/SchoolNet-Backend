@@ -62,9 +62,12 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/schedules/**").permitAll()
 
                         .requestMatchers(HttpMethod.POST, "/api/grades/assign").hasRole("TEACHER")
-                        .requestMatchers(HttpMethod.GET, "/api/grades/gradeOfStudent").hasRole("STUDENT")
+                        .requestMatchers(HttpMethod.GET, "/api/grades/gradeOfStudent").hasAnyRole("TEACHER","STUDENT")
                         .requestMatchers(HttpMethod.GET, "/api/grades/studentsByAssignment").hasRole("TEACHER")
                         .requestMatchers(HttpMethod.GET, "/api/grades/gradesAssignedByProfessor").hasRole("TEACHER")
+                        .requestMatchers(HttpMethod.GET, "/api/grades/byProfessor").hasRole("TEACHER")
+
+
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
