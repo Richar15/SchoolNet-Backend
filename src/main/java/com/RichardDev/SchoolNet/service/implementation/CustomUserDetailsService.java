@@ -9,7 +9,6 @@ import com.RichardDev.SchoolNet.persistence.repository.StudentRepository;
 import com.RichardDev.SchoolNet.persistence.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -47,13 +46,14 @@ public class CustomUserDetailsService implements UserDetailsService {
         throw new UsernameNotFoundException("Usuario no encontrado: " + username);
     }
 
+    // ✅ MODIFICADO: Ahora usa CustomUserDetails en lugar de User
     private UserDetails buildUserDetails(UserEntity user) {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + user.getRol().name());
 
-        return new User(
+        return new CustomUserDetails(
+                user.getId(),           // ✅ INCLUIR EL ID DEL USUARIO
                 user.getUsername(),
                 user.getPassword(),
-                true, true, true, true,
                 Collections.singleton(authority)
         );
     }
@@ -76,5 +76,4 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         throw new UsernameNotFoundException("Usuario no encontrado: " + username);
     }
-
 }
