@@ -1,0 +1,9 @@
+
+services:
+  schoolnet-backend:
+    build: .
+    container_name: schoolnet-backend
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
