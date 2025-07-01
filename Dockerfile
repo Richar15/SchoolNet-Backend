@@ -10,7 +10,7 @@ WORKDIR /app
 COPY .mvn/ .mvn/
 COPY mvnw pom.xml ./
 
-# ✅ Dar permisos de ejecución al wrapper de Maven
+#Dar permisos de ejecución al wrapper de Maven
 RUN chmod +x mvnw
 
 # Descargar dependencias (sin compilar aún)
