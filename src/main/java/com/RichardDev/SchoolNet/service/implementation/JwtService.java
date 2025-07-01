@@ -38,10 +38,10 @@ public class JwtService {
         return generateToken(new HashMap<>(), userDetails);
     }
 
-    // ✅ MODIFICADO: Ahora incluye el userId en el token
+
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
 
-        // ✅ OBTENER EL ID DEL USUARIO SI ES CustomUserDetails
+
         Long userId = null;
         if (userDetails instanceof CustomUserDetails) {
             userId = ((CustomUserDetails) userDetails).getId();
@@ -54,7 +54,7 @@ public class JwtService {
                 .builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
-                .claim("userId", userId) // ✅ AGREGAR EL userId AL TOKEN
+                .claim("userId", userId)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
@@ -88,7 +88,7 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    // ✅ MEJORADO: Mejor manejo de tipos y logging
+
     public Long extractUserId(String token) {
         try {
             Claims claims = extractAllClaims(token);
