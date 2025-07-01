@@ -9,15 +9,13 @@ WORKDIR /app
 # Copiar archivos necesarios para construir la app
 COPY .mvn/ .mvn/
 COPY mvnw pom.xml ./
+COPY src ./src
 
 #Dar permisos de ejecución al wrapper de Maven
 RUN chmod +x mvnw
 
 # Descargar dependencias (sin compilar aún)
 RUN ./mvnw dependency:go-offline
-
-# Copiar el resto del código fuente
-COPY src/ src/
 
 # Compilar la aplicación
 RUN ./mvnw clean package -DskipTests
